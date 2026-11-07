@@ -1,0 +1,2272 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light only">
+  <title>Blog de Cirugía - Analia Torres</title>
+  <meta name="description" content="Resúmenes de clase, talleres y diario de rotación de Cirugía. Universidad de Panamá, Facultad de Medicina.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23ffe847'/%3E%3Cpath d='M16 8v16M8 16h16' stroke='%23171a52' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* Zona segura para celulares con notch o barra inferior */
+:root { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+.top { top: env(safe-area-inset-top, 0px); padding-top: max(.7rem, env(safe-area-inset-top, 0px)); }
+
+/* Estilos del blog. Los colores y la tipografia reales estan mas abajo, en el bloque TEMA "QUIROFANO EN NEGRO". */
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 1rem/1.55 var(--f-ui); min-height: 100vh; display: flex; flex-direction: column;
+}
+main { flex: 1; outline: none; }
+a, a:link, a:visited { color: inherit; text-decoration: none; text-underline-offset: 3px; }
+a:hover, a:focus { text-decoration: none; }
+h1, h2, h3, h4 { margin: 0; line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; font-variation-settings: "wdth" 92; }
+p { margin: 0; }
+img, svg { max-width: 100%; }
+:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; border-radius: 6px; }
+
+.skip { position: absolute; left: -999px; top: 0; background: var(--noche); color: #fff; padding: .6rem 1rem; z-index: 100; }
+.skip:focus { left: 0; }
+
+.wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+
+/* ---------- Encabezado ---------- */
+.top {
+  position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;
+  padding: .75rem clamp(1rem, 4vw, 2.5rem);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: .8rem; text-decoration: none; color: var(--ink); }
+.brand-bar { width: 4px; height: 2.3rem; background: var(--azul); border-radius: 2px; }
+.brand-t { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-t b { font-size: 1.05rem; font-weight: 700; }
+.brand-t small { font-size: .82rem; color: var(--muted); }
+
+#nav { display: flex; gap: .3rem; margin-left: auto; }
+#nav a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: .95rem; padding: .5rem 1rem; border-radius: 999px; white-space: nowrap; }
+#nav a:hover { background: var(--sky); }
+#nav a[aria-current="page"] { background: var(--acc); color: var(--on-acc); }
+
+.theme { width: 42px; height: 42px; display: grid; place-items: center; cursor: pointer; border: 0; border-radius: 50%; background: var(--sky); color: var(--head); }
+.theme:hover { background: var(--azul); color: var(--noche); }
+
+@media (max-width: 860px) {
+  .theme { margin-left: auto; }
+  #nav { order: 3; width: 100%; margin-left: 0; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+  #nav::-webkit-scrollbar { display: none; }
+}
+
+/* ---------- Componentes ---------- */
+.banda { padding-block: clamp(3rem, 7vw, 5.5rem); }
+.banda.sky { background: var(--sky); color: var(--ink); }
+.banda.cab { padding-block: clamp(2rem, 5vw, 3.5rem); }
+.banda.azul { background: var(--azul-banda); color: #fff; }
+.banda.oscura { background: var(--banda-oscura); color: #fff; }
+
+.tit { border-left: 5px solid var(--azul); padding-left: 1rem; }
+.tit h1, .tit h2 { color: var(--acc); font-weight: 800; }
+.tit h1 { font-size: clamp(2rem, 5vw, 3.3rem); }
+.tit h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); }
+.tit .sub { margin-top: .4rem; color: var(--muted); font-size: 1.05rem; max-width: 56ch; }
+.cab .tit h1 { color: var(--head); }
+.cab .tit .sub { color: var(--pizarra); }
+.banda.oscura .tit h2 { color: #5cc8ec; }
+.banda.oscura .tit .sub { color: #b8ced6; }
+
+.pill { display: inline-block; padding: .65rem 1.3rem; border-radius: 999px; font-weight: 700; background: var(--sky); color: var(--head); }
+.pill.azul { background: var(--acc); color: var(--on-acc); }
+.pill.oscura { background: var(--pizarra); color: #fff; }
+.pills { display: flex; flex-wrap: wrap; gap: .7rem; }
+
+.btn { display: inline-block; padding: .8rem 1.5rem; border-radius: 999px; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; border: 2px solid var(--acc); background: var(--acc); color: var(--on-acc); }
+.btn:hover { filter: brightness(1.08); }
+.btn.ghost { background: transparent; color: var(--acc); }
+.btn.ghost:hover { background: var(--soft); filter: none; }
+.btn.claro { background: #fff; border-color: #fff; color: var(--noche); }
+.btn.contorno { background: transparent; border-color: #fff; color: #fff; }
+.btn.contorno:hover { background: rgba(255,255,255,.14); filter: none; }
+.acciones { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+.barra { display: block; height: 7px; background: color-mix(in srgb, currentColor 16%, transparent); border-radius: 99px; overflow: hidden; }
+.barra u { display: block; height: 100%; background: var(--azul); text-decoration: none; border-radius: 99px; }
+
+/* ---------- Inicio ---------- */
+.hero { padding-block: clamp(2rem, 5vw, 3.5rem) 1.5rem; }
+.hero-grid { display: grid; gap: 2rem; align-items: stretch; }
+@media (min-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); min-height: min(70vh, 600px); gap: 3rem; } }
+.hero-t { display: flex; flex-direction: column; justify-content: space-between; gap: 2.5rem; }
+.marca { align-self: flex-start; border-left: 4px solid var(--azul); padding-left: .8rem; font-weight: 700; font-size: 1.05rem; color: var(--head); }
+.hero h1 { font-size: clamp(3rem, 8vw, 5.8rem); line-height: .98; letter-spacing: -.04em; font-weight: 800; color: var(--head); font-variation-settings: "wdth" 84; text-wrap: balance; margin-bottom: 1.6rem; }
+.hero-art { display: grid; place-items: center; }
+.hero-art svg { width: 100%; max-width: 560px; height: auto; }
+
+.sutura { margin-top: clamp(1.5rem, 4vw, 2.5rem); height: 56px; overflow: hidden; }
+.sutura svg { display: block; width: 100%; height: 56px; }
+.sutura .inc { stroke: var(--pizarra); stroke-width: 3.4; stroke-linecap: round; fill: none; }
+.sutura .pt path { stroke: var(--acc); stroke-width: 2.8; stroke-linecap: round; fill: none; stroke-dasharray: 1; stroke-dashoffset: 1; animation: hilo .32s ease-out forwards; animation-delay: calc(var(--i) * 42ms + .15s); }
+.sutura .pt circle { fill: var(--acc); opacity: 0; animation: nudo .15s ease-out forwards; animation-delay: calc(var(--i) * 42ms + .35s); }
+@keyframes hilo { to { stroke-dashoffset: 0; } }
+@keyframes nudo { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .sutura .pt path { animation: none; stroke-dashoffset: 0; }
+  .sutura .pt circle { animation: none; opacity: 1; }
+  html { scroll-behavior: auto; }
+}
+
+.about { text-align: center; }
+.about .wrap { max-width: 780px; }
+.about h2 { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 800; }
+.about p { margin: 1.1rem auto 0; font-size: 1.2rem; line-height: 1.6; max-width: 54ch; }
+.about .bajar { margin: 1.75rem auto 1.5rem; display: grid; place-items: center; width: 62px; height: 62px; border-radius: 50%; border: 0; background: rgba(255,255,255,.18); cursor: pointer; }
+.about .bajar:hover { background: rgba(255,255,255,.3); }
+.about .acciones { justify-content: center; }
+
+.dos-col { display: grid; gap: 2.5rem; align-items: start; }
+@media (min-width: 900px) { .dos-col { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 4rem; } }
+.dos-col .txt { margin-top: 1.25rem; max-width: 40ch; color: var(--muted); }
+
+.pastillas { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem; }
+.pasti { position: relative; overflow: hidden; border-radius: 28px; background: var(--sky); min-height: 3.6rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .7rem 1.4rem; color: var(--ink); }
+.pasti .rel { position: absolute; inset: 0 auto 0 0; width: var(--p); background: var(--fill); }
+.pasti .t, .pasti .n { position: relative; }
+.pasti .t { font-weight: 600; }
+.pasti .n { font-weight: 700; white-space: nowrap; }
+.pasti .t, .pasti .n { color: var(--fill-ink); }
+.pasti.ok .n::before { content: "✓ "; }
+
+.tarjetas { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); }
+.tarj { display: flex; flex-direction: column; gap: .55rem; height: 100%; padding: 1.4rem; border-radius: 28px; background: var(--pizarra); color: #fff; text-decoration: none; }
+.tarj:hover { background: #38505a; }
+.tarj .ico { align-self: flex-start; min-width: 4.2rem; text-align: center; padding: .5rem 1.1rem; border-radius: 999px; background: var(--azul); color: var(--noche); font-weight: 800; font-size: 1.15rem; }
+.tarj b { color: #5cc8ec; font-size: 1.15rem; line-height: 1.2; margin-top: .35rem; }
+.tarj span.d { color: #d4e4ea; font-size: .95rem; }
+.tarj .barra { margin-top: auto; color: #fff; }
+
+.recientes { list-style: none; padding: 0; margin: 1.75rem 0 0; display: grid; gap: .5rem; }
+.vacio-simple { margin-top: 1.75rem; padding: 1.5rem; border: 2px dashed var(--line); border-radius: 26px; color: var(--muted); max-width: 60ch; }
+
+.losetas { display: grid; gap: 1.25rem; }
+@media (min-width: 860px) { .losetas { grid-template-columns: 1fr 1fr; } }
+.loseta {
+  padding: clamp(1.6rem, 4vw, 2.5rem); border-radius: 34px; color: #fff; background-color: var(--azul-banda);
+  background-image: linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
+  background-size: 26px 26px; display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;
+}
+.loseta h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); border-left: 4px solid #fff; padding-left: .9rem; font-weight: 800; }
+.loseta p { font-size: 1.1rem; max-width: 40ch; }
+.cierre { margin-top: 2.5rem; }
+
+/* ---------- Listas ---------- */
+.pagina { padding-block: 2.5rem 4rem; }
+.tools { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: end; padding: 1.1rem 1.25rem; background: var(--soft); border-radius: 28px; }
+.field { display: flex; flex-direction: column; gap: .3rem; font-size: .85rem; font-weight: 700; color: var(--muted); }
+.field { min-width: 0; }
+.field.grow { flex: 1 1 240px; }
+.field input, .field select { font: inherit; font-size: 1rem; font-weight: 500; color: var(--ink); background: var(--bg); border: 2px solid transparent; border-radius: 999px; padding: .6rem 1.1rem; min-height: 44px; }
+.field input:focus, .field select:focus { border-color: var(--azul); outline: none; }
+.tog { display: flex; align-items: center; gap: .55rem; min-height: 44px; font-weight: 600; cursor: pointer; }
+.tog input { width: 1.2rem; height: 1.2rem; accent-color: var(--acc); }
+.count { margin: 1.25rem 0 0; color: var(--muted); font-size: .95rem; }
+
+.sem { margin-top: 2.25rem; }
+.sem > h2 { display: flex; align-items: baseline; gap: .8rem; font-size: 1.5rem; color: var(--acc); border-left: 5px solid var(--azul); padding-left: .85rem; margin-bottom: 1rem; }
+.sem > h2 small { font-size: .95rem; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.sem ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+
+.row { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) 9.5rem; gap: .25rem 1rem; align-items: center; padding: .75rem 1.2rem .75rem .75rem; border-radius: 24px; background: var(--soft); color: var(--ink); text-decoration: none; }
+.row:hover { background: var(--sky); }
+.row .n { width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: 50%; background: var(--azul); color: var(--noche); font-weight: 800; font-size: .95rem; }
+.row .t b { font-weight: 600; font-size: 1.05rem; line-height: 1.25; }
+.row .t small { display: block; color: var(--muted); font-size: .9rem; margin-top: .15rem; }
+.row .a { font-size: .9rem; font-weight: 500; line-height: 1.25; display: flex; align-items: center; gap: .5rem; }
+.dot { width: .7rem; height: .7rem; border-radius: 50%; background: var(--c); flex: none; }
+.tag { display: inline-block; margin-left: .5rem; padding: .05rem .65rem; border-radius: 99px; font-size: .78rem; font-weight: 700; vertical-align: .1em; background: var(--pizarra); color: #fff; }
+.tag.taller { background: var(--azul); color: var(--noche); }
+.st { font-size: .85rem; font-weight: 700; white-space: nowrap; }
+.st.ok { color: var(--acc); }
+.st.ok::before { content: "✓ "; }
+.st.no { color: var(--muted); font-weight: 500; }
+@media (max-width: 600px) { .field { flex: 1 1 100%; } .field select, .field input { width: 100%; } }
+@media (max-width: 760px) {
+  .row { grid-template-columns: 2.5rem minmax(0, 1fr); }
+  .row .est { grid-column: 2; }
+}
+.sinres { margin-top: 2rem; padding: 2rem; border: 2px dashed var(--line); border-radius: 26px; text-align: center; color: var(--muted); }
+
+/* ---------- Lector de resumen ---------- */
+.cab .back { display: inline-block; font-weight: 700; text-decoration: none; margin-bottom: 1.5rem; color: var(--head); }
+.cab .back::before { content: "‹ "; }
+.cab .pills { margin-top: 1.5rem; }
+.cab .pill { background: #fff; }
+.cab .pill.azul { background: var(--acc); }
+.cab .pill.oscura { background: var(--pizarra); }
+.cab .by { margin-top: .6rem; font-size: 1.1rem; color: var(--pizarra); }
+
+.cols { display: grid; gap: 2.5rem; }
+@media (min-width: 980px) { .cols { grid-template-columns: minmax(0, 1fr) 310px; gap: 4rem; } }
+.cuerpo { max-width: 66ch; font-family: var(--f-read); font-size: 1.15rem; line-height: 1.8; }
+.cuerpo p { margin: 0 0 1.2em; }
+.cuerpo h3 { font-family: var(--f-ui); font-size: 1.4rem; margin: 2em 0 .6em; color: var(--acc); border-left: 4px solid var(--azul); padding-left: .7rem; }
+.cuerpo ul { padding-left: 1.3em; margin: 0 0 1.2em; }
+.cuerpo li { margin-bottom: .35em; }
+
+.perla { max-width: 66ch; margin-top: 2rem; padding: 1.4rem 1.6rem; border-radius: 28px; background: var(--banda-oscura); color: #fff; }
+.perla h4 { display: inline-block; font-size: .9rem; padding: .25rem .9rem; border-radius: 99px; background: var(--azul); color: var(--noche); margin-bottom: .8rem; }
+.perla p { font-family: var(--f-read); font-size: 1.12rem; line-height: 1.6; }
+
+.pendiente { max-width: 60ch; padding: 2rem; border: 2px dashed var(--line); border-radius: 28px; background: var(--soft); }
+.pendiente h2 { font-size: 1.5rem; margin-bottom: .6rem; color: var(--acc); }
+.pendiente p { color: var(--muted); }
+
+.lado { display: flex; flex-direction: column; gap: 1.25rem; }
+@media (min-width: 980px) { .lado { position: sticky; top: 5.5rem; align-self: start; } }
+.ficha { background: var(--soft); border-radius: 28px; padding: 1.3rem 1.5rem; }
+.ficha h2 { font-size: 1.1rem; margin-bottom: .8rem; color: var(--acc); }
+.ficha dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: .45rem 1rem; font-size: .95rem; }
+.ficha dt { color: var(--muted); }
+.ficha dd { margin: 0; font-weight: 600; }
+.claves { list-style: none; padding: 0; margin: 0; display: grid; gap: .65rem; }
+.claves label { display: grid; grid-template-columns: 1.3rem 1fr; gap: .6rem; cursor: pointer; line-height: 1.35; }
+.claves input { width: 1.15rem; height: 1.15rem; margin-top: .1rem; accent-color: var(--acc); }
+.claves input:checked + span { color: var(--muted); text-decoration: line-through; }
+
+.flash { max-width: 66ch; margin-top: 2.5rem; }
+.flash h2 { font-size: 1.5rem; margin-bottom: .3rem; color: var(--acc); }
+.flash > p { color: var(--muted); margin-bottom: 1rem; }
+.fcs { display: grid; gap: .9rem; }
+@media (min-width: 640px) { .fcs { grid-template-columns: 1fr 1fr; } }
+.fc { font: inherit; text-align: left; color: var(--ink); cursor: pointer; padding: 1.15rem 1.3rem; min-height: 7.5rem; background: var(--sky); border: 0; border-radius: 28px; display: flex; flex-direction: column; gap: .7rem; }
+.fc:hover { background: color-mix(in srgb, var(--azul) 35%, var(--sky)); }
+.fc .q { font-weight: 700; }
+.fc .r { display: none; font-family: var(--f-read); padding-top: .7rem; border-top: 1px solid rgba(255,255,255,.3); }
+.fc .hint { font-size: .8rem; color: var(--muted); margin-top: auto; }
+.fc[aria-expanded="true"] { background: var(--pizarra); color: #fff; }
+.fc[aria-expanded="true"] .q { color: #5cc8ec; }
+.fc[aria-expanded="true"] .r { display: block; }
+.fc[aria-expanded="true"] .hint { display: none; }
+
+.pn { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.pn a { display: block; max-width: 22rem; text-decoration: none; color: var(--ink); padding: .8rem 1.1rem; border-radius: 22px; }
+.pn a:hover { background: var(--soft); }
+.pn small { display: block; color: var(--muted); }
+.pn b { font-weight: 600; }
+.pn .sig { text-align: right; margin-left: auto; }
+
+/* ---------- Rotación ---------- */
+.tabs { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.75rem; }
+.tabs button { font: inherit; font-weight: 700; cursor: pointer; padding: .65rem 1.3rem; border-radius: 999px; border: 0; background: #fff; color: var(--head); }
+.tabs button:hover { background: var(--azul); color: var(--noche); }
+.tabs button[aria-selected="true"] { background: var(--acc); color: var(--on-acc); }
+.semana-cab { margin-top: .5rem; }
+.semana-cab h2 { font-size: 1.8rem; color: var(--acc); }
+.semana-cab p { color: var(--muted); margin-top: .3rem; }
+.aviso { margin-top: 1.25rem; padding: 1rem 1.3rem; background: var(--soft); border-radius: 22px; font-size: .95rem; max-width: 64ch; }
+.aviso b { color: var(--acc); }
+
+.dias { list-style: none; margin: 1.75rem 0 0 .6rem; padding: 0; border-left: 3px solid var(--sky); }
+.dia { position: relative; padding-left: 1.7rem; padding-bottom: .9rem; }
+.dia::before { content: ""; position: absolute; left: -.72rem; top: .95rem; width: 1.1rem; height: 1.1rem; border-radius: 50%; background: var(--bg); border: 3px solid var(--azul); }
+.dia.ok::before { background: var(--azul); }
+.dia details { background: var(--soft); border-radius: 24px; }
+.dia details[open] { box-shadow: 0 0 0 2px var(--azul); }
+.dia summary { list-style: none; cursor: pointer; display: flex; gap: 1rem; align-items: baseline; padding: .95rem 1.3rem; }
+.dia summary::-webkit-details-marker { display: none; }
+.dia summary::after { content: "+"; margin-left: auto; font-weight: 700; font-size: 1.4rem; color: var(--acc); }
+.dia details[open] summary::after { content: "–"; }
+.dia .dn { font-weight: 800; white-space: nowrap; color: var(--acc); }
+.dia .dt { font-weight: 600; }
+.dia .dt.vacio { color: var(--muted); font-weight: 400; }
+.dia .dc { padding: .2rem 1.3rem 1.3rem; display: grid; gap: 1.1rem; }
+.dia .dc h3 { font-size: 1rem; color: var(--acc); margin-bottom: .25rem; }
+.dia .dc p { font-family: var(--f-read); font-size: 1.08rem; line-height: 1.7; max-width: 64ch; margin-bottom: .6em; }
+.dia .dc ul { font-family: var(--f-read); font-size: 1.08rem; line-height: 1.7; margin: 0 0 .6em; padding-left: 1.2em; }
+.dia .dc .nada { color: var(--muted); font-family: var(--f-ui); font-size: .98rem; }
+
+/* ---------- Sobre mí ---------- */
+.sobre { display: grid; gap: 2.5rem; }
+@media (min-width: 860px) { .sobre { grid-template-columns: minmax(0, 1.3fr) minmax(260px, 1fr); gap: 4rem; } }
+.sobre .cuerpo { font-size: 1.2rem; }
+
+/* ---------- Pie ---------- */
+.pie { margin-top: 0; padding: 2rem clamp(1rem, 4vw, 2.5rem) 2.5rem; background: var(--banda-oscura); color: #b8ced6; font-size: .9rem; display: grid; gap: .5rem; }
+.pie p { max-width: 70ch; }
+.pie #pie-firma { color: #fff; font-weight: 600; }
+
+/* ---------- Ilustración: tinta que cambia en modo oscuro ---------- */
+.tinta { fill: #182527; }
+.tintas { stroke: #182527; }
+
+/* =====================================================================
+   Secciones nuevas
+   ===================================================================== */
+body.sin-scroll { overflow: hidden; }
+.pill.peq { padding: .25rem .85rem; font-size: .85rem; }
+.btn.peq { padding: .5rem 1.1rem; font-size: .92rem; }
+.est { display: flex; flex-direction: column; align-items: flex-start; }
+
+/* Fotos y espacios para fotos */
+.foto-vacia {
+  width: 100%; height: 100%; min-height: 9rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; padding: 1rem; text-align: center;
+  border: 2px dashed color-mix(in srgb, var(--acc) 45%, transparent); border-radius: 28px; background: var(--soft); color: var(--acc); font-weight: 600; font-size: .95rem;
+}
+.foto-cel { aspect-ratio: 4 / 3; }
+.galeria { display: grid; gap: .9rem; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); margin-top: 1rem; }
+.foto { padding: 0; border: 0; background: var(--soft); border-radius: 24px; overflow: hidden; cursor: zoom-in; aspect-ratio: 4 / 3; display: block; width: 100%; }
+.foto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s; }
+.foto:hover img { transform: scale(1.04); }
+.foto .foto-vacia { border-radius: 24px; }
+
+.lb { position: fixed; inset: 0; z-index: 200; background: rgba(10, 20, 22, .92); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; gap: .8rem; }
+.lb[hidden] { display: none; }
+.lb img { max-width: min(96vw, 1200px); max-height: 82vh; border-radius: 18px; object-fit: contain; background: #fff; }
+.lb-cap { color: #e6f1f4; font-weight: 500; }
+.lb-x { position: absolute; top: 1rem; right: 1rem; width: 46px; height: 46px; border-radius: 50%; border: 0; background: #fff; color: var(--noche); font-size: 1.8rem; line-height: 1; cursor: pointer; }
+
+/* Visor de documentos */
+.visor { margin-top: 0; }
+.visor-carga { color: var(--muted); padding: 1rem 0; }
+.visor-bar { display: flex; flex-wrap: wrap; gap: .6rem 1rem; align-items: center; justify-content: space-between; padding: .75rem 1.1rem; background: var(--pizarra); color: #fff; border-radius: 22px 22px 0 0; }
+.visor-t { font-weight: 700; }
+.visor-btns { display: flex; gap: .5rem; flex-wrap: wrap; }
+.visor-bar .btn { border-color: #fff; background: #fff; color: var(--noche); }
+.visor-bar .btn.ghost { background: transparent; color: #fff; }
+.visor-frame { display: block; width: 100%; height: clamp(480px, 82vh, 900px); border: 2px solid var(--pizarra); border-top: 0; border-radius: 0 0 22px 22px; background: #fff; }
+.visor-img { display: block; width: 100%; border: 2px solid var(--pizarra); border-top: 0; border-radius: 0 0 22px 22px; }
+.visor-nota { margin-top: .6rem; font-size: .88rem; color: var(--muted); }
+.visor .pendiente { max-width: none; }
+.cols .visor + .cuerpo, .cols .visor + .perla { margin-top: 2rem; }
+
+/* Inicio: sobre mí */
+.sobre-mi { display: grid; gap: 2.5rem; align-items: center; }
+@media (min-width: 860px) { .sobre-mi { grid-template-columns: minmax(240px, 380px) minmax(0, 1fr); gap: 4rem; } }
+.retrato { aspect-ratio: 4 / 5; border-radius: 40px; overflow: hidden; background: rgba(255, 255, 255, .16); max-width: 380px; width: 100%; }
+.retrato img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.retrato .foto-vacia { color: #fff; border-color: rgba(255, 255, 255, .7); background: transparent; border-radius: 40px; }
+.tit-blanco { border-left-color: #fff; }
+.tit-blanco h2 { color: #fff; font-size: clamp(1.9rem, 4vw, 2.7rem); }
+.tit-blanco .sub { color: #e6f6fb; }
+.texto-blanco { margin: 1.4rem 0 1.5rem; font-size: 1.18rem; line-height: 1.65; max-width: 52ch; }
+.texto-blanco p { margin: 0 0 1em; }
+
+/* Inicio: profesores */
+.profes { list-style: none; margin: 2.25rem 0 0; padding: 0; display: grid; gap: 2rem 1.25rem; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.prof { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.avatar { width: 124px; height: 124px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; background: var(--pizarra); flex: none; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.avatar.ini { background: var(--pizarra); color: #5cc8ec; font-weight: 800; font-size: 2.2rem; letter-spacing: -.02em; }
+.prof-n { margin-top: -1.1rem; position: relative; padding: .4rem 1.1rem; border-radius: 999px; background: var(--azul); color: var(--noche); font-weight: 700; font-size: .95rem; max-width: 100%; }
+.prof-d { margin-top: .5rem; color: #c9dbe1; font-size: .92rem; }
+.prof details { margin-top: .5rem; width: 100%; text-align: left; }
+.prof summary { cursor: pointer; text-align: center; color: #5cc8ec; font-weight: 600; font-size: .9rem; list-style: none; padding: .35rem; }
+.prof summary::-webkit-details-marker { display: none; }
+.prof summary::after { content: " +"; }
+.prof details[open] summary::after { content: " –"; }
+.prof ul { list-style: none; margin: .4rem 0 0; padding: .8rem 1rem; background: var(--pizarra); border-radius: 22px; display: grid; gap: .45rem; font-size: .9rem; }
+.prof ul a { color: #fff; text-decoration: none; }
+.prof ul a:hover { text-decoration: underline; }
+
+/* Inicio: atajos */
+.atajos { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+@media (min-width: 900px) { .atajos { grid-template-columns: repeat(3, 1fr); } }
+.atajo { display: flex; flex-direction: column; gap: .3rem; height: 100%; padding: 1.4rem 1.5rem; border-radius: 30px; background: var(--bg); color: var(--ink); text-decoration: none; border: 2px solid transparent; }
+.atajo b { font-size: 1.35rem; color: var(--acc); }
+.atajo span { color: var(--muted); }
+.atajo:hover { border-color: var(--azul); }
+
+/* Talleres */
+.taller { padding-bottom: 2.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--line); }
+.taller:last-child { border-bottom: 0; }
+.taller .pills { margin-top: 1rem; }
+.dos-taller { display: grid; gap: 2rem; margin-top: 1.5rem; }
+@media (min-width: 900px) { .dos-taller { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3rem; } }
+.dos-taller .cuerpo { margin-bottom: 1.5rem; }
+.dos-taller .galeria { margin-top: 0; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+
+/* Rotaciones */
+.bloque { margin-top: 1.75rem; }
+.mini { font-size: 1.1rem; color: var(--acc); }
+.bloque .cuerpo { max-width: 66ch; }
+
+/* Multimedia */
+.chips { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1.75rem; }
+.chip { font: inherit; font-weight: 700; cursor: pointer; padding: .55rem 1.2rem; border-radius: 999px; border: 0; background: #fff; color: var(--head); }
+.chip:hover { background: var(--azul); color: var(--noche); }
+.chip[aria-pressed="true"] { background: var(--acc); color: var(--on-acc); }
+.mm-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.mm { margin: 0; }
+.mm .foto { aspect-ratio: 4 / 3; }
+.mm-video { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 24px; background: var(--noche); }
+.mm-video.enlace { display: grid; place-items: center; }
+.mm figcaption { padding: .7rem .4rem 0; display: flex; flex-direction: column; gap: .15rem; }
+.mm figcaption span { color: var(--muted); font-size: .92rem; }
+
+/* Trabajos */
+.trabajos { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem; }
+.trabajo details { background: var(--soft); border-radius: 26px; }
+.trabajo details[open] { box-shadow: 0 0 0 2px var(--azul); }
+.trabajo summary { list-style: none; cursor: pointer; display: flex; gap: 1rem; align-items: center; padding: 1.1rem 1.4rem; }
+.trabajo summary::-webkit-details-marker { display: none; }
+.trabajo summary::after { content: "+"; margin-left: auto; font-size: 1.5rem; font-weight: 700; color: var(--acc); }
+.trabajo details[open] summary::after { content: "–"; }
+.trabajo .tt { font-weight: 700; font-size: 1.1rem; }
+.trabajo .tc { padding: .2rem 1.4rem 1.5rem; display: grid; gap: 1.25rem; }
+.trabajo.vacio-t { display: flex; align-items: center; justify-content: center; min-height: 4.5rem; border: 2px dashed color-mix(in srgb, var(--acc) 45%, transparent); border-radius: 26px; color: var(--acc); font-weight: 600; }
+
+/* Extras */
+.extras { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.extra { background: var(--soft); border-radius: 30px; overflow: hidden; display: flex; flex-direction: column; }
+.extra-f { aspect-ratio: 16 / 10; }
+.extra-f img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.extra-f .foto-vacia { border-radius: 0; border: 0; border-bottom: 2px dashed color-mix(in srgb, var(--acc) 45%, transparent); background: color-mix(in srgb, var(--sky) 60%, transparent); }
+.extra-t { padding: 1.2rem 1.4rem 1.5rem; display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; }
+.extra-t b { font-size: 1.15rem; }
+.extra-t span { color: var(--muted); }
+.vacio-simple { margin-top: 1.75rem; }
+
+@media (max-width: 600px) {
+  .profes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem .75rem; }
+  .avatar { width: 96px; height: 96px; }
+  .avatar.ini { font-size: 1.8rem; }
+  .prof-n { font-size: .85rem; padding: .35rem .8rem; }
+}
+
+/* =====================================================================
+   PORTADA del inicio: quirófano con tinte azul, título con resaltador y herramientas
+   ===================================================================== */
+:root { --f-portada: "Poppins", "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif; }
+
+.portada {
+  --tinte: rgba(26, 46, 214, .62); --resalta: #fce566;
+  position: relative; isolation: isolate; overflow: hidden; color: #fff;
+  min-height: 640px; min-height: max(100svh, 640px);
+  display: grid; place-items: center; padding: 6.5rem 1rem 5rem;
+  background:
+    radial-gradient(45% 38% at 28% 22%, rgba(120, 150, 255, .55), transparent 70%),
+    radial-gradient(40% 34% at 76% 26%, rgba(120, 150, 255, .45), transparent 70%),
+    linear-gradient(180deg, #0f1a80, #0a1150);
+}
+.p-fondo { position: absolute; inset: -7% 0; z-index: -3; transform: translateY(calc(var(--sy, 0) * .28px)); will-change: transform; }
+.p-foto { display: block; width: 100%; height: 100%; object-fit: cover; animation: p-zoom 2.8s cubic-bezier(.2, .7, .2, 1) backwards; }
+.p-tinte { position: absolute; inset: 0; z-index: -2; background: var(--tinte); }
+.p-tinte::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5, 10, 60, .6), transparent 32%, transparent 65%, rgba(5, 10, 60, .55)); }
+
+.p-centro { text-align: center; max-width: 100%; }
+.p-titulo {
+  margin: 0; font-family: var(--f-portada); font-weight: 800; color: #fff;
+  font-size: clamp(2.3rem, 8.6vw, 7.4rem); line-height: 1.03; letter-spacing: -.035em; font-variation-settings: normal;
+  text-shadow: 0 .04em .35em rgba(4, 8, 60, .35);
+}
+.p-l1 { display: block; overflow: hidden; padding: .04em .1em .08em; }
+.p-txt { display: inline-block; animation: p-sube .9s cubic-bezier(.2, .8, .2, 1) .35s backwards; }
+.p-l2 { display: inline-block; position: relative; margin-top: .02em; }
+.p-l2t { position: relative; display: inline-block; padding: .02em .28em .1em; color: #0b0b12; text-shadow: none; }
+.p-marca { position: absolute; inset: 0; background: var(--resalta); transform-origin: left center; animation: p-trazo .7s cubic-bezier(.7, 0, .2, 1) .75s backwards; }
+.p-txt2 { position: relative; display: inline-block; animation: p-descubre .7s cubic-bezier(.7, 0, .2, 1) .9s backwards; }
+
+.p-inst { position: absolute; z-index: 3; pointer-events: none; }
+.p-mov { display: block; transform: translate3d(calc(var(--mx, 0) * 22px * var(--k, 1)), calc(var(--my, 0) * 14px * var(--k, 1)), 0); transition: transform .3s ease-out; }
+.p-inst img { display: block; width: auto; }
+.p-pinzas { --k: 1; left: calc(-.75em + var(--xp)); top: calc(-.5em + var(--yp)); }
+.p-pinzas img { height: calc(2.9em * var(--tp)); transform: rotate(var(--gp)); animation: p-izq 1.1s cubic-bezier(.2, 1.15, .3, 1) 1.25s backwards, p-flota-p 6s ease-in-out 2.5s infinite; }
+.p-bisturi { --k: -1; right: calc(-.6em - var(--xb)); top: calc(-.5em + var(--yb)); }
+.p-bisturi img { height: calc(2.9em * var(--tb)); transform: rotate(var(--gb)); animation: p-der 1.1s cubic-bezier(.2, 1.15, .3, 1) 1.4s backwards, p-flota-b 7s ease-in-out 2.6s infinite; }
+
+.p-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: clamp(1.5rem, 4vw, 2.5rem); animation: p-aparece .8s ease 1.9s backwards; }
+.p-pill { padding: .5rem 1.15rem; border-radius: 999px; border: 1.5px solid rgba(255, 255, 255, .75); font: 600 .95rem/1.2 var(--f-portada); color: #fff; }
+.p-pill.llena { background: #fff; border-color: #fff; color: #10142e; }
+
+.p-bajar { position: absolute; left: 50%; bottom: 1.6rem; width: 52px; height: 52px; margin-left: -26px; display: grid; place-items: center; border: 1.5px solid rgba(255, 255, 255, .7); border-radius: 50%; background: rgba(255, 255, 255, .1); cursor: pointer; animation: p-aparece .8s ease 2.3s backwards, p-rebota 2s ease-in-out 3.1s infinite; }
+.p-bajar:hover { background: rgba(255, 255, 255, .25); }
+
+/* La animación espera a que carguen las imágenes */
+.portada:not(.lista) *, .portada:not(.lista) *::after { animation-play-state: paused !important; }
+
+@keyframes p-zoom { from { transform: scale(1.16); } }
+@keyframes p-sube { from { transform: translateY(115%); } }
+@keyframes p-trazo { from { transform: scaleX(0); } }
+@keyframes p-descubre { from { clip-path: inset(0 100% 0 0); } }
+@keyframes p-izq { from { transform: translateX(-75vw) rotate(calc(var(--gp) - 260deg)); opacity: 0; } }
+@keyframes p-der { from { transform: translateX(75vw) rotate(calc(var(--gb) + 260deg)); opacity: 0; } }
+@keyframes p-flota-p { 0%, 100% { transform: translateY(0) rotate(var(--gp)); } 50% { transform: translateY(-9px) rotate(calc(var(--gp) + 2.5deg)); } }
+@keyframes p-flota-b { 0%, 100% { transform: translateY(0) rotate(var(--gb)); } 50% { transform: translateY(-8px) rotate(calc(var(--gb) - 2.5deg)); } }
+@keyframes p-aparece { from { opacity: 0; transform: translateY(14px); } }
+@keyframes p-rebota { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+
+@media (max-width: 700px) {
+  .portada { padding-inline: .6rem; }
+  .p-titulo { font-size: clamp(2rem, 9vw, 3.4rem); }
+  .p-pinzas { left: calc(-.5em + var(--xp)); }
+  .p-bisturi { right: calc(-.4em - var(--xb)); }
+  .p-pinzas img { height: calc(2.3em * var(--tp)); }
+  .p-bisturi img { height: calc(2.3em * var(--tb)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portada *, .portada *::after { animation: none !important; }
+  .p-mov { transition: none; }
+}
+
+/* ---------- Encabezado: centrado, y transparente sobre la portada ---------- */
+@media (min-width: 1000px) {
+  .top { display: grid; grid-template-columns: 1fr auto 1fr; }
+  #nav { margin: 0; }
+  .theme { justify-self: end; margin-left: 0; }
+}
+.top, #nav a, .theme, .brand-t b, .brand-t small { transition: background-color .35s ease, color .35s ease, border-color .35s ease, backdrop-filter .35s ease; }
+
+/* El menú ahora es siempre igual (negro sólido, fijo arriba): la portada nueva ya es negra de por sí, así que no hace falta el truco de menú transparente. */
+
+/* ---------- Transiciones entre secciones ---------- */
+.ruta-in > * { animation: ruta-in .5s cubic-bezier(.2, .7, .2, 1) backwards; }
+@keyframes ruta-in { from { opacity: 0; transform: translateY(16px); } }
+.revela { opacity: 0; transform: translateY(30px); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0ms); }
+.revela.visto { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .ruta-in > * { animation: none; }
+  .revela { opacity: 1; transform: none; transition: none; }
+}
+
+/* =====================================================================
+   PORTADA COMO IMAGEN (tu diseño de Canva tal cual) y ajustes exactos del modo por capas
+   ===================================================================== */
+.solo-lectores { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.portada-img { display: block; padding: 0; height: 100vh; height: 100svh; min-height: 520px; background: #13080f; }
+.pi-fondo { position: absolute; inset: 0; z-index: -3; overflow: hidden; }
+.pi-blur { display: block; width: 100%; height: 100%; object-fit: cover; filter: blur(30px) saturate(1.15); transform: scale(1.2); opacity: 0; }
+.pi-marco { position: absolute; inset: 0; transform: translateY(calc(var(--sy, 0) * .22px)); will-change: transform; }
+.pi-img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;
+  transform: translate3d(calc(var(--mx, 0) * -14px), calc(var(--my, 0) * -9px), 0) scale(1.03);
+  transition: transform .4s ease-out;
+  animation: pi-abre 1.6s cubic-bezier(.7, 0, .2, 1) backwards;
+}
+.pi-top { position: absolute; inset: 0 0 auto 0; height: 24%; background: linear-gradient(180deg, rgba(0, 0, 0, .72), rgba(0, 0, 0, 0)); pointer-events: none; }
+@keyframes pi-abre { from { clip-path: inset(0 50% 0 50%); transform: scale(1.18); filter: brightness(1.7); } }
+
+@media (max-width: 820px) {
+  .portada-img { height: auto; min-height: 0; padding: 7.6rem 0 4.6rem; }
+  .pi-blur { opacity: 1; }
+  .pi-marco { position: relative; inset: auto; transform: none; overflow: hidden; }
+  .pi-img { position: relative; inset: auto; width: 116%; max-width: none; margin-left: -8%; height: auto; aspect-ratio: 1907 / 1076; object-fit: contain; transform: none; }
+  .pi-top { height: 40%; }
+}
+
+/* Modo por capas: medidas exactas de tu diseño (1366 x 768, título de 89 px) */
+.p-fondo { background: radial-gradient(45% 38% at 28% 22%, rgba(90, 120, 255, .25), transparent 70%), var(--fondo-color, #13080f); }
+.p-foto { opacity: var(--fondo-op, .53); }
+.p-tinte::after { background: linear-gradient(180deg, rgba(0, 0, 0, .6), transparent 28%); }
+.p-titulo { letter-spacing: -.03em; }
+.p-l2t { line-height: 1.23; padding: 0 .18em; }
+.p-inst { transform: translate(-50%, -50%); right: auto; }
+.p-inst .p-mov { width: 100%; height: 100%; }
+.p-inst img { width: 100%; height: 100%; object-fit: contain; }
+.p-pinzas { left: calc(-.12em + var(--xp)); top: calc(.77em + var(--yp)); width: calc(2.63em * var(--tp)); height: calc(1.76em * var(--tp)); }
+.p-bisturi { left: calc(100% + var(--xb)); top: calc(.82em + var(--yb)); width: calc(3.03em * var(--tb)); height: calc(2.03em * var(--tb)); }
+
+/* =====================================================================
+   TEMA "BITÁCORA": collage tipo scrapbook, papel kraft, gasa verde,
+   letra manuscrita para títulos y Poppins para el texto.
+   ===================================================================== */
+:root {
+  --amarillo: #bfe0c9;         /* ya no es amarillo: verde menta claro, para no romper selectores viejos */
+  --tinta: #362d1f;
+  --bg: #fbf6e9;               /* papel crema, más cálido y luminoso */
+  --sky: #f2e9cd;              /* kraft claro, para cabeceras */
+  --azul: #5cae82;             /* verde menta: el acento principal, más vivo */
+  --azul-banda: #4f9d75;
+  --acc: #2f7a52;
+  --on-acc: #fbf6e9;
+  --noche: #33291c;
+  --pizarra: #3d5a45;
+  --head: #33291c;
+  --ink: #3c3221;
+  --muted: #5f5236;
+  --soft: #f0e6c8;
+  --line: #e2d19f;
+  --banda-oscura: #2c4a34;
+  --kraft: #f7efd6;
+  --kraft-borde: #dcc590;
+  --musgo: #5cae82;
+  --musgo-osc: #2f7a52;
+  --coral: #e8895f;            /* segundo acento: terracota/coral, para variedad sin ser neón */
+  --coral-osc: #c96a41;
+  --escrub: #6fa3c7;           /* tercer acento: azul de bata quirúrgica */
+  --escrub-osc: #3f7ea3;
+  --f-ui: "Poppins", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --f-read: "Poppins", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --f-hand: "Caveat", "Comic Sans MS", var(--f-ui);
+}
+body { line-height: 1.65; background-color: var(--bg); background-image: none; }
+h1, h2, h3 {
+  font-family: var(--f-hand); font-variation-settings: normal; letter-spacing: 0; font-weight: 700;
+  transform: rotate(-.4deg);
+}
+h4 { font-variation-settings: normal; letter-spacing: -.02em; font-weight: 800; }
+
+/* ---- Textura de gasa/tela sobre las bandas de color ---- */
+.banda.sec, .banda.cab, .portada-formal {
+  background-color: var(--sky);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .38) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .38) 1px, transparent 1px);
+  background-size: 9px 9px;
+}
+
+/* ---- Etiqueta de papel rasgado: la usan los títulos (.tit) y la portada ---- */
+.rasgado {
+  position: relative; display: inline-block; background: var(--kraft); color: var(--tinta);
+  padding: .35em .7em .45em; box-shadow: 0 3px 0 rgba(0, 0, 0, .06), 0 10px 18px rgba(35, 36, 29, .12);
+  clip-path: polygon(0% 6%, 3% 1%, 7% 5%, 11% 0%, 16% 4%, 21% 1%, 26% 5%, 31% 0%, 37% 4%, 43% 1%, 49% 5%, 55% 0%, 61% 4%, 67% 1%, 73% 5%, 79% 0%, 85% 4%, 91% 1%, 96% 5%, 100% 0%, 100% 94%, 96% 99%, 91% 95%, 85% 100%, 79% 96%, 73% 100%, 67% 95%, 61% 99%, 55% 95%, 49% 100%, 43% 96%, 37% 100%, 31% 95%, 26% 99%, 21% 95%, 16% 100%, 11% 96%, 7% 100%, 3% 95%, 0% 99%);
+}
+
+/* ---- Estrella/sol para numerar (índice, número de clase) ---- */
+.estrella {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--tinta); font-family: var(--f-hand); font-weight: 700;
+  background: var(--musgo);
+  clip-path: polygon(50% 0%, 61% 18%, 82% 10%, 80% 33%, 100% 41%, 84% 58%, 92% 79%, 70% 76%, 63% 97%, 50% 79%, 37% 97%, 30% 76%, 8% 79%, 16% 58%, 0% 41%, 20% 33%, 18% 10%, 39% 18%);
+}
+
+/* ---- Cinta washi (adorno de esquina) ---- */
+.washi { position: absolute; width: 3.4rem; height: 1.3rem; background: color-mix(in srgb, var(--musgo) 55%, transparent); transform: rotate(-8deg); box-shadow: 0 1px 2px rgba(0, 0, 0, .12); }
+
+/* ---- Títulos con resaltador amarillo, como en la portada ---- */
+.tit { border-left: 0; padding-left: 0; }
+.tit h1, .tit h2, .banda .tit h1, .banda .tit h2, .banda.oscura .tit h2, .cab .tit h1, .tit-blanco h2 {
+  display: inline; background: var(--amarillo); color: var(--tinta);
+  padding: .02em .28em .07em; line-height: 1.34; font-weight: 800; letter-spacing: -.03em;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+}
+.tit h1 { font-size: clamp(1.9rem, 5vw, 3.5rem); }
+.tit h2 { font-size: clamp(1.5rem, 3.4vw, 2.4rem); }
+.tit .sub { display: block; margin-top: 1.1rem; }
+.hl { display: inline-block; background: var(--amarillo); color: var(--tinta); padding: .02em .3em .07em; }
+.sem > h2 { border-left: 0; padding-left: 0; color: var(--ink); }
+
+/* ---- Encabezado negro, como antes ---- */
+.top { background: rgba(10, 10, 10, .94); border-bottom: 1px solid rgba(255, 255, 255, .12); }
+.brand, .brand-t b { color: #fff; }
+.brand-t small { color: rgba(255, 255, 255, .75); }
+.brand-bar { background: var(--musgo); }
+#nav a { color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, .55); }
+#nav a:hover { background: rgba(255, 255, 255, .16); }
+#nav a[aria-current="page"] { background: #fff; color: var(--tinta); box-shadow: none; }
+body.en-inicio.desplazado .top { background: rgba(10, 10, 10, .94); border-bottom-color: rgba(255, 255, 255, .12); }
+
+/* ---- Cabeceras de página (Clases, Talleres, Rotaciones...): off-white, igual que el resto ---- */
+.banda.cab { background: var(--soft); color: var(--ink); }
+.banda.azul { background: var(--soft); color: var(--ink); }
+.banda.oscura { background: var(--soft); color: var(--ink); }
+.cab .tit .sub { color: var(--muted); }
+.cab .back { color: var(--head); }
+.cab .by { color: var(--muted); }
+.cab .pill { background: var(--bg); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.cab .pill.azul { background: var(--amarillo); color: var(--tinta); box-shadow: none; }
+.cab .pill.oscura { background: var(--pizarra); color: #fff; box-shadow: none; }
+.tabs button, .chip { background: var(--bg); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+.tabs button:hover, .chip:hover { background: var(--sky); }
+.tabs button[aria-selected="true"], .chip[aria-pressed="true"] { box-shadow: none; }
+
+/* ---- Botones y píldoras ---- */
+.btn { background: var(--amarillo); border-color: var(--amarillo); color: var(--tinta); transition: transform .2s ease, filter .2s ease, background-color .2s ease; }
+.btn:hover { filter: none; transform: translateY(-2px) rotate(-1deg); background: #c9dcc3; border-color: #c9dcc3; }
+.btn.ghost { background: transparent; color: var(--acc); border-color: var(--acc); }
+.btn.ghost:hover { background: var(--soft); transform: translateY(-2px); }
+.btn.claro { background: #fff; border-color: #fff; color: var(--tinta); }
+.btn.contorno { background: transparent; border-color: #fff; color: #fff; }
+.pill { background: var(--soft); color: var(--head); }
+.pill.azul { background: var(--amarillo); color: var(--tinta); }
+.pill.oscura { background: var(--musgo-osc); color: #fff; }
+.banda.azul .pill.oscura { background: var(--tinta); }
+
+/* ---- Listas y tarjetas ---- */
+.row .n, .prof-n { background: var(--amarillo); color: var(--tinta); }
+.row:hover { background: var(--sky); }
+.tag.taller { background: var(--amarillo); color: var(--tinta); }
+.cuerpo { font-size: 1.05rem; line-height: 1.75; }
+.cuerpo h3 { border-left-color: var(--amarillo); }
+.atajo { background: var(--soft); }
+.atajo:hover { border-color: var(--amarillo); }
+.prof-d { color: #cfcbc0; }
+.prof summary { color: var(--amarillo); }
+.avatar.ini { background: rgba(255, 255, 255, .1); color: var(--amarillo); }
+.prof ul { background: rgba(255, 255, 255, .08); }
+.fc[aria-expanded="true"] .q, .banda.oscura .tit .sub { color: #d8d4ca; }
+.fc[aria-expanded="true"] .q { color: var(--amarillo); }
+.dia::before, .trabajo details[open] { border-color: var(--amarillo); }
+.lb { background: rgba(8, 10, 40, .94); }
+.pie { background: var(--banda-oscura); color: #cfcfc0; }
+.tinta { fill: #0b0b12; }
+.tintas { stroke: #0b0b12; }
+.visor-bar .btn.ghost { border-color: #fff; color: #fff; }
+.visor-bar .btn.ghost:hover { background: rgba(255, 255, 255, .16); }
+
+/* =====================================================================
+   INICIO: portada como franja, fondo blanco abajo, catedrático y asistentes
+   ===================================================================== */
+/* La portada es solo una franja arriba */
+.portada-img { height: clamp(360px, 52vh, 560px); min-height: 0; }
+.portada { min-height: clamp(360px, 52vh, 560px); padding: 5.5rem 1rem 2.5rem; }
+.p-titulo { font-size: clamp(2rem, 6.4vw, 5.4rem); }
+.pi-top { height: 34%; }
+@media (max-width: 820px) {
+  .portada-img { height: auto; padding: 7rem 0 1.2rem; }
+  .p-titulo { font-size: clamp(1.9rem, 8.6vw, 3.2rem); }
+}
+
+/* Todo lo de abajo, sobre fondo blanco */
+.sec { background: var(--bg); color: var(--ink); }
+.sec + .sec { border-top: 1px solid var(--line); }
+.texto-bio { margin: 1.4rem 0 0; font-size: 1.08rem; line-height: 1.75; max-width: 56ch; }
+.texto-bio p { margin: 0 0 1em; }
+.retrato { background: var(--soft); }
+.retrato .foto-vacia { color: var(--acc); border-color: color-mix(in srgb, var(--acc) 45%, transparent); background: transparent; }
+
+.sub-h { display: inline-block; margin-top: 2.6rem; padding-bottom: .2rem; font-size: 1.25rem; color: var(--ink); border-bottom: 4px solid var(--amarillo); }
+.profes { margin-top: 1.4rem; }
+.avatar.ini { background: var(--musgo-osc); color: #fff; }
+.prof-d { color: var(--muted); }
+.prof summary { color: var(--acc); }
+.prof ul { background: var(--soft); }
+.prof ul a { color: var(--ink); }
+
+/* Catedrático y asistentes: espacio para la foto */
+.equipo-l { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1.75rem 1rem; }
+.avatar.grande { width: 150px; height: 150px; }
+.avatar.vacio-av { flex-direction: column; gap: .3rem; align-content: center; justify-items: center; background: var(--soft); color: var(--acc); border: 2px dashed color-mix(in srgb, var(--acc) 50%, transparent); text-align: center; padding: .5rem; }
+.avatar.vacio-av svg { width: 34px; height: 34px; }
+.avatar.vacio-av small { font-size: .72rem; font-weight: 600; line-height: 1.2; }
+@media (max-width: 600px) { .avatar.grande { width: 110px; height: 110px; } .avatar.vacio-av small { display: none; } }
+
+/* Pie claro */
+.pie { background: var(--soft); color: var(--muted); border-top: 1px solid var(--line); }
+.pie #pie-firma { color: var(--ink); }
+.portada-img { height: clamp(380px, 56vh, 600px); }
+.portada { min-height: clamp(380px, 56vh, 600px); }
+.pi-img { object-position: 50% 40%; }
+@media (max-width: 820px) { .portada-img { height: auto; } .pi-img { object-position: center; } }
+
+/* =====================================================================
+   PORTADA "ESCENA": tu fondo del quirófano + pinzas y bisturí como capas animadas
+   ===================================================================== */
+.portada-esc { display: block; padding: 0; height: clamp(380px, 56vh, 600px); min-height: 0; background: #13080f; container-type: size; }
+.pe-marco { --W: max(100cqw, calc(100cqh * 1.7723)); position: absolute; inset: 0; overflow: hidden; transform: translateY(calc(var(--sy, 0) * .22px)); will-change: transform; }
+.pe-escena { position: absolute; width: var(--W); height: calc(var(--W) * .5642); left: calc((100cqw - var(--W)) / 2); top: calc((100cqh - var(--W) * .5642) * .4); }
+.pe-img { display: block; width: 100%; height: 100%; object-fit: cover; transform: translate3d(calc(var(--mx, 0) * -10px), calc(var(--my, 0) * -6px), 0) scale(1.03); transition: transform .4s ease-out; animation: pi-abre 1.6s cubic-bezier(.7, 0, .2, 1) backwards; }
+.pe-inst { position: absolute; transform: translate(-50%, -50%); pointer-events: none; }
+.pe-mov { display: block; transform: translate3d(calc(var(--mx, 0) * 22px * var(--k, 1)), calc(var(--my, 0) * 14px * var(--k, 1)), 0); transition: transform .3s ease-out; }
+.pe-inst img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 16px rgba(3, 6, 50, .5)); }
+.pe-pinzas { --k: 1; left: calc(20.9% + var(--xp, 0%)); top: calc(55.7% + var(--yp, 0%)); width: calc(11% * var(--tp, 1)); }
+.pe-pinzas img { transform: rotate(var(--gp, -15deg)); animation: p-izq 1.1s cubic-bezier(.2, 1.15, .3, 1) 1s backwards, p-flota-p 6s ease-in-out 2.3s infinite; }
+.pe-bisturi { --k: -1; left: calc(75.6% + var(--xb, 0%)); top: calc(55.7% + var(--yb, 0%)); width: calc(13.6% * var(--tb, 1)); }
+.pe-bisturi img { transform: rotate(var(--gb, 158deg)); animation: p-der 1.1s cubic-bezier(.2, 1.15, .3, 1) 1.15s backwards, p-flota-b 7s ease-in-out 2.4s infinite; }
+@media (max-width: 820px) {
+  .portada-esc { height: auto; padding: 7rem 0 1.2rem; container-type: normal; }
+  .pe-marco { --W: 116vw; position: relative; inset: auto; width: 100%; height: calc(116vw * .5642); transform: none; }
+  .pe-escena { left: -8vw; top: 0; }
+}
+
+/* Centro de rotación */
+.centro { display: grid; gap: 2.5rem; align-items: center; }
+@media (min-width: 900px) { .centro { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 4rem; } }
+.centro .galeria { margin-top: 0; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+/* Preceptores sin nombre todavía */
+.prof-n.sin-nombre { background: var(--soft); color: var(--muted); font-weight: 600; box-shadow: inset 0 0 0 1.5px var(--line); }
+
+/* =====================================================================
+   PORTADA FORMAL: solo texto, fondo negro. El resto del sitio es off-white.
+   ===================================================================== */
+:root { --f-formal: "Fraunces", "Poppins", Georgia, serif; }
+
+#portada.portada-formal {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  min-height: clamp(320px, 44vh, 460px);
+  padding: clamp(3.2rem, 8vw, 5.5rem) 1.5rem;
+  background: radial-gradient(120% 100% at 50% 0%, #161616, #000 72%);
+  color: #f2efe8; text-align: center;
+}
+.pf-textura {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+  background-image: linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+  background-size: 34px 34px; mask-image: radial-gradient(70% 70% at 50% 40%, #000, transparent);
+}
+.pf-cont { position: relative; z-index: 1; max-width: 46rem; margin-inline: auto; }
+.pf-ojo {
+  margin: 0; font-family: var(--f-ui); font-size: .82rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+  color: #b9b3a6;
+}
+.pf-titulo {
+  margin: .9rem 0 0; font-family: var(--f-formal); font-weight: 600; font-style: normal;
+  font-size: clamp(2.6rem, 6.4vw, 4.6rem); line-height: 1.08; letter-spacing: -.01em; color: #f7f4ee;
+}
+.pf-raya { margin: 1.5rem auto; display: flex; align-items: center; justify-content: center; }
+.pf-raya span { display: block; width: 74px; height: 2px; background: var(--amarillo); border-radius: 2px; }
+.pf-sub { margin: 0; font-family: var(--f-ui); font-size: clamp(1rem, 1.7vw, 1.15rem); font-weight: 400; color: #cfc9bc; letter-spacing: .01em; }
+
+.pf-bajar {
+  position: absolute; left: 50%; bottom: clamp(1rem, 3vw, 1.75rem); transform: translateX(-50%);
+  width: 44px; height: 44px; display: grid; place-items: center; z-index: 1;
+  border: 1.5px solid rgba(247, 244, 238, .45); border-radius: 50%; background: transparent; color: #f2efe8; cursor: pointer;
+}
+.pf-bajar:hover { background: rgba(247, 244, 238, .1); border-color: rgba(247, 244, 238, .7); }
+
+.pf-ojo, .pf-titulo, .pf-raya, .pf-sub { opacity: 0; transform: translateY(10px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+.pf-titulo { transition-delay: .08s; }
+.pf-raya { transition-delay: .16s; }
+.pf-sub { transition-delay: .22s; }
+.portada-formal.lista .pf-ojo, .portada-formal.lista .pf-titulo, .portada-formal.lista .pf-raya, .portada-formal.lista .pf-sub { opacity: 1; transform: none; }
+.pf-bajar { opacity: 0; transition: opacity .6s ease .5s; }
+.portada-formal.lista .pf-bajar { opacity: 1; }
+
+@media (max-width: 600px) {
+  #portada.portada-formal { min-height: 0; padding-block: 3.2rem 3.6rem; }
+  .pf-bajar { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pf-ojo, .pf-titulo, .pf-raya, .pf-sub, .pf-bajar { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* =====================================================================
+   PORTADA ESTILO "BITÁCORA": textura de gasa verde + etiqueta de papel
+   kraft rasgada con letra manuscrita, como la carátula del collage.
+   ===================================================================== */
+#portada.portada-formal {
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, .3) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .3) 0 1px, transparent 1px 9px),
+    var(--azul-banda);
+  padding: clamp(2.6rem, 7vw, 4.5rem) 1.25rem;
+}
+.pf-textura { display: none; }
+
+.pf-fila { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: clamp(1.5rem, 4vw, 3.5rem); flex-wrap: wrap; }
+
+/* Tira de polaroids: una foto grande al centro, con una chiquita arriba y otra abajo */
+.pf-tira { flex: 0 0 auto; display: flex; align-items: center; }
+
+.pf-polaroid {
+  background: #fbf8ef; padding: .5rem .5rem 1.2rem;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .06), 0 10px 20px rgba(20, 25, 15, .22);
+}
+.pf-polaroid img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pf-polaroid .foto-vacia {
+  width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .4rem;
+  border: 2px dashed var(--musgo-osc); color: var(--musgo-osc); background: var(--kraft);
+}
+.pf-polaroid .foto-vacia svg { width: 22%; height: 22%; }
+.pf-polaroid .foto-vacia span { font-family: var(--f-hand); font-size: 1rem; font-weight: 700; padding: 0 .4rem; text-align: center; }
+
+.pf-polaroid-grande { width: min(185px, 26vw); aspect-ratio: 4 / 5; transform: rotate(-3deg); z-index: 2; margin: 0 -.6rem; }
+.pf-polaroid-grande .foto-vacia span { font-size: 1.05rem; }
+.pf-polaroid-chica { width: min(185px, 26vw); aspect-ratio: 4 / 5; }
+.pf-polaroid-chica .foto-vacia span { font-size: 1.05rem; }
+.pf-polaroid-arriba { transform: rotate(-6deg); z-index: 1; }
+.pf-polaroid-abajo { transform: rotate(6deg); z-index: 3; }
+
+
+.pf-cont {
+  position: relative; z-index: 1; flex: 1 1 26rem; max-width: 34rem;
+  background: var(--kraft); color: var(--tinta); padding: 2.2rem 2rem 2.4rem; transform: rotate(-1deg);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .08), 0 18px 30px rgba(20, 25, 15, .22);
+  clip-path: polygon(0% 4%, 4% 0%, 9% 3%, 14% 0%, 19% 2%, 25% 0%, 31% 3%, 37% 0%, 43% 2%, 49% 0%, 55% 3%, 61% 0%, 67% 2%, 73% 0%, 79% 3%, 85% 0%, 91% 2%, 97% 0%, 100% 4%, 99% 12%, 100% 25%, 99% 40%, 100% 55%, 99% 70%, 100% 85%, 99% 96%, 96% 100%, 90% 98%, 84% 100%, 78% 97%, 72% 100%, 66% 98%, 60% 100%, 54% 97%, 48% 100%, 42% 98%, 36% 100%, 30% 97%, 24% 100%, 18% 98%, 12% 100%, 6% 97%, 0% 100%, 1% 85%, 0% 70%, 1% 55%, 0% 40%, 1% 25%, 0% 12%);
+}
+.pf-ojo {
+  font-family: var(--f-ui); font-size: .62rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--musgo-osc);
+}
+.pf-titulo {
+  font-family: var(--f-hand); font-weight: 700; color: var(--tinta); transform: none;
+  font-size: clamp(2.6rem, 8vw, 4rem); line-height: 1; margin-top: .5rem;
+}
+.pf-raya { justify-content: flex-start; margin: 1.1rem 0; }
+.pf-raya span { background: var(--musgo); height: 3px; width: 56px; }
+.pf-sub { font-family: var(--f-hand); font-size: 1.35rem; color: var(--pizarra); font-weight: 700; }
+.pf-bajar { border-color: rgba(255, 255, 255, .6); color: #fff; bottom: clamp(.8rem, 3vw, 1.4rem); }
+.pf-bajar:hover { background: rgba(255, 255, 255, .18); border-color: #fff; }
+
+/* Un par de estrellitas de adorno, como en el collage */
+.pf-cont::before, .pf-cont::after {
+  content: ""; position: absolute; width: 30px; height: 30px; background: var(--musgo-osc);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.pf-cont::before { top: -14px; left: -10px; transform: rotate(-12deg); }
+.pf-cont::after { bottom: -12px; right: 10%; width: 18px; height: 18px; transform: rotate(20deg); opacity: .8; }
+
+/* Portada en pantallas angostas (celular, tablet): la MISMA composición que en
+   computadora (fotos a la izquierda, etiqueta a la derecha), solo que a escala. */
+@media (max-width: 1000px) {
+  #portada.portada-formal { min-height: 0; padding: 6vw 3vw 7vw; }
+  .pf-fila { flex-direction: row; flex-wrap: nowrap; gap: 3.5vw; padding-inline: 0; }
+  .pf-tira { order: 0; }
+  .pf-bajar { display: none; }
+  .pf-polaroid { padding: .5vw .5vw 1.2vw; }
+  .pf-polaroid-grande { width: 15.5vw; margin: 0 -.6vw; }
+  .pf-polaroid-chica { width: 15.5vw; }
+  .pf-polaroid .foto-vacia { border-width: max(1px, .2vw); gap: .4vw; }
+  .pf-polaroid .foto-vacia span, .pf-polaroid-grande .foto-vacia span { font-size: max(.5rem, 1.5vw); padding: 0 .3vw; }
+  .pf-cont { flex: 1 1 auto; min-width: 0; max-width: 54vw; padding: 3.5vw 3.2vw 3.8vw; }
+  .pf-ojo { font-size: max(.5rem, 1vw); letter-spacing: .14em; }
+  .pf-titulo { font-size: max(1.4rem, 6.4vw); margin-top: .8vw; }
+  .pf-raya { margin: 1.8vw 0; }
+  .pf-raya span { width: 5.6vw; height: max(2px, .3vw); }
+  .pf-sub { font-size: max(.75rem, 2.16vw); }
+  .pf-cont::before { width: 3vw; height: 3vw; top: -1.4vw; left: -1vw; }
+  .pf-cont::after { width: 1.8vw; height: 1.8vw; bottom: -1.2vw; }
+}
+
+/* En el celular: la misma composición, pero ocupando casi todo el ancho y más alta */
+@media (max-width: 600px) {
+  #portada.portada-formal { padding: 11vw 2vw 12vw; }
+  .pf-fila { gap: 3vw; align-items: center; }
+  /* Fotos en triángulo invertido: dos arriba y una abajo, al centro */
+  .pf-tira { display: grid; grid-template-columns: auto auto; grid-template-areas: "a b" "c c"; justify-items: center; align-items: center; }
+  .pf-polaroid-arriba { grid-area: a; margin-right: -2vw; transform: rotate(-6deg); }
+  .pf-polaroid-abajo { grid-area: b; margin-left: -2vw; transform: rotate(6deg); z-index: 2; }
+  .pf-polaroid-grande { grid-area: c; margin: -9vw 0 0 !important; transform: rotate(-2deg); z-index: 3; }
+  .pf-tira { flex: 0 0 auto; }
+  .pf-polaroid { padding: 1.4vw 1.4vw 4.4vw; }
+  .pf-polaroid-grande { width: 25vw; z-index: 3; }
+  .pf-polaroid-chica { width: 25vw; }
+  .pf-polaroid .foto-vacia span, .pf-polaroid-grande .foto-vacia span { font-size: max(.7rem, 3.2vw); }
+  .pf-cont { max-width: none; flex: 1 1 0; min-width: 0; margin-left: 0; z-index: 4; padding: 5.5vw 3vw 6vw; }
+  .pf-ojo { font-size: 2.05vw; letter-spacing: .02em; }
+  .pf-ojo .ojo-l { display: block; white-space: nowrap; }
+  .pf-titulo { font-size: 8vw; margin-top: 1.4vw; line-height: 1.05; }
+  .pf-raya { margin: 2.8vw 0; }
+  .pf-raya span { width: 9vw; height: max(2px, .7vw); }
+  .pf-sub { font-size: 4.2vw; line-height: 1.3; }
+  .pf-cont::before { width: 4.6vw; height: 4.6vw; top: -2vw; left: -1.4vw; }
+  .pf-cont::after { width: 3vw; height: 3vw; bottom: -1.6vw; }
+}
+
+/* Los marcos de las polaroids: sin la altura mínima ni las esquinas redondeadas
+   de los otros espacios para fotos, así mantienen su forma 4:5 a cualquier tamaño. */
+.pf-polaroid { overflow: hidden; box-sizing: border-box; display: flex; flex-direction: column; background: #fffdf8; }
+.pf-polaroid .foto-vacia { min-height: 0; padding: 0; border-radius: 0; overflow: hidden; flex: 1 1 auto; width: auto; height: auto; box-sizing: border-box; background: #efe6cc; }
+.pf-polaroid > img { flex: 1 1 auto; min-height: 0; }
+.pf-polaroid .foto-vacia span { line-height: 1.15; }
+/* Que el texto de la etiqueta se corte en lugares naturales */
+.pf-ojo, .pf-titulo, .pf-sub { text-wrap: balance; }
+.pf-sub .seg { white-space: nowrap; }
+
+/* Modo oscuro: la tarjeta de papel kraft de la portada necesita texto claro */
+
+/* Modo oscuro: que los recuadros "rasgados" y estrellas también se vean bien */
+
+/* Los números de la lista de clases, como una estrellita/sello */
+.row .n {
+  border-radius: 0; background: var(--musgo); color: var(--tinta); font-family: var(--f-hand); font-size: 1.25rem; font-weight: 700;
+  clip-path: polygon(50% 0%, 61% 18%, 82% 10%, 80% 33%, 100% 41%, 84% 58%, 92% 79%, 70% 76%, 63% 97%, 50% 79%, 37% 97%, 30% 76%, 8% 79%, 16% 58%, 0% 41%, 20% 33%, 18% 10%, 39% 18%);
+}
+
+/* =====================================================================
+   Hilo de sutura decorativo, pequeño, en la esquina de las cabeceras
+   ===================================================================== */
+.doodle { position: absolute; pointer-events: none; }
+.doodle svg { display: block; width: 100%; height: 100%; }
+
+.cab { position: relative; overflow: hidden; }
+.d-cab { top: 1.2rem; right: clamp(1rem, 4vw, 3rem); width: 92px; height: 34px; background: none; box-shadow: none; color: var(--musgo-osc); opacity: .6; transform: rotate(-3deg); }
+.d-cab svg { width: 100%; height: 100%; }
+@media (max-width: 640px) { .d-cab { display: none; } }
+
+/* ---- Un poco de color variado (verde / azul escrub / coral), sin llegar a neón ---- */
+.profes .prof:nth-child(3n+2) .prof-n { background: var(--escrub); color: var(--tinta); }
+.profes .prof:nth-child(3n+3) .prof-n { background: var(--coral); color: var(--tinta); }
+.profes .prof:nth-child(3n+2) .avatar:not(.vacio-av) { border-color: var(--escrub); }
+.profes .prof:nth-child(3n+3) .avatar:not(.vacio-av) { border-color: var(--coral); }
+
+.atajos li:nth-child(3n+2) .atajo { border-color: var(--escrub); }
+.atajos li:nth-child(3n+2) .atajo b { color: var(--escrub-osc); }
+.atajos li:nth-child(3n+3) .atajo { border-color: var(--coral); }
+.atajos li:nth-child(3n+3) .atajo b { color: var(--coral-osc); }
+
+.sem:nth-child(2n) > h2 .hl { background: var(--escrub); }
+.sem:nth-child(3n) > h2 .hl { background: var(--coral); }
+
+.sem ol > li:nth-child(3n+2) .n { background: var(--escrub); }
+.sem ol > li:nth-child(3n+3) .n { background: var(--coral); }
+
+
+
+/* Que tu nombre (Sobre mí) y el hospital (Centro de rotación) resalten más */
+#sobre .tit .sub, #centro .tit .sub {
+  font-family: var(--f-hand); font-size: 1.7rem; font-weight: 700; line-height: 1;
+  color: var(--musgo-osc); margin-top: .6rem;
+}
+
+/* Todas las tarjetas de "Explora el diario" con contorno visible (antes solo 2 de cada 3 lo tenían) */
+.atajos li:nth-child(3n+1) .atajo { border-color: var(--musgo); }
+
+  
+/* Resumen como hoja (imagen del diseño de Canva) */
+.res-hoja { margin: 0; }
+.res-hoja a:has(img) { display: block; }
+.res-hoja img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: 0 2px 0 rgba(0,0,0,.05), 0 10px 26px rgba(20,25,15,.16); background: #fff; }
+.res-hoja figcaption { margin-top: .6rem; font-size: .9rem; opacity: .75; }
+.res-hoja .visor-bar { margin-bottom: .8rem; }
+
+.res-hoja-img { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.hoja-lb { position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; background: rgba(12, 14, 10, .96); color: #fff; }
+.hoja-lb-bar { display: flex; align-items: center; gap: .5rem; padding: .6rem .75rem; padding-top: calc(.6rem + env(safe-area-inset-top, 0px)); background: #1b1f17; }
+.hoja-lb-t { flex: 1; min-width: 0; font-family: var(--f-ui); font-size: .95rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hoja-lb-bar button { width: 44px; height: 44px; flex: 0 0 auto; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; background: transparent; color: #fff; font-size: 1.35rem; line-height: 1; cursor: pointer; }
+.hoja-lb-bar button:disabled { opacity: .35; cursor: default; }
+.hoja-lb-bar .hoja-lb-x { font-size: 1.1rem; background: rgba(255,255,255,.12); }
+.hoja-lb-scroll { flex: 1; overflow: auto; -webkit-overflow-scrolling: touch; padding-bottom: env(safe-area-inset-bottom, 0px); }
+.hoja-lb-scroll img { display: block; width: 100%; max-width: none; height: auto; margin: 0 auto; }
+@media (min-width: 900px) { .hoja-lb-scroll img { max-width: 900px; } .hoja-lb-scroll img[style*="150%"], .hoja-lb-scroll img[style*="200%"], .hoja-lb-scroll img[style*="300%"] { max-width: none; } }
+
+/* Hoja de resumen: una página a la vez, con flechas */
+.hp { position: relative; }
+.hp-vista { display: block; width: 100%; aspect-ratio: 1241 / 1755; overflow: hidden; border-radius: 6px; background: #fff; box-shadow: 0 2px 0 rgba(0,0,0,.05), 0 10px 26px rgba(20,25,15,.16); }
+.res-hoja .hp-vista img { display: block; width: 100%; height: auto; border-radius: 0; box-shadow: none; transition: none; will-change: transform; }
+.visor-bar.solo-btn { justify-content: flex-end; }
+.hp-flecha { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 0; background: rgba(28, 32, 24, .78); color: #fff; font-size: 2rem; line-height: 1; padding-bottom: 4px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+.hp-ant { left: .5rem; } .hp-sig { right: .5rem; }
+.hp-flecha:disabled { opacity: 0; pointer-events: none; }
+.hp-cont { font-weight: 700; opacity: 1; }
+/* Flechas de «Anterior / Siguiente» para ir a otra clase */
+.pn-fl { display: inline-block; font-size: 1.45em; line-height: 1; font-weight: 700; vertical-align: -.12em; transition: transform .2s ease; }
+.pn small { white-space: nowrap; }
+.pn a:hover .pn-fl { transform: translateX(3px); }
+.pn a:not(.sig):hover .pn-fl { transform: translateX(-3px); }
+.hoja-lb-marco { position: relative; width: 100%; aspect-ratio: 1241 / 1755; overflow: hidden; margin: 0 auto; background: #fff; }
+.hoja-lb-marco img { display: block; width: 100% !important; max-width: none !important; height: auto; transition: none; }
+@media (min-width: 900px) { .hoja-lb-marco:not(.ampliado) { max-width: 760px; } }
+.hoja-lb-pie { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: .6rem; padding-bottom: calc(.6rem + env(safe-area-inset-bottom, 0px)); background: #1b1f17; }
+.hoja-lb-pie button { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: transparent; color: #fff; font-size: 1.9rem; line-height: 1; padding-bottom: 4px; cursor: pointer; }
+.hoja-lb-pie button:disabled { opacity: .3; cursor: default; }
+.hoja-lb-cont { min-width: 8.5em; text-align: center; font-family: var(--f-ui); font-weight: 600; }
+
+/* Lector de PDF */
+.res-pdf .hp-vista { position: relative; }
+.res-pdf .hp-vista canvas, .hoja-lb-marco canvas { display: block; width: 100% !important; height: auto; background: #fff; will-change: transform; }
+.hp-cargando { position: absolute; inset: 0; display: grid; place-items: center; padding: 1rem; text-align: center; font-family: var(--f-ui); font-weight: 600; color: #555; background: #fff; }
+</style>
+</head>
+<body>
+  <a class="skip" href="#app">Saltar al contenido</a>
+
+  <header class="top">
+    <a class="brand" href="#/" aria-label="Inicio, Blog de Cirugía">
+      <span class="brand-bar" aria-hidden="true"></span>
+      <span class="brand-t"><b>Analia Torres</b><small>Blog de Cirugía</small></span>
+    </a>
+
+    <nav id="nav" aria-label="Principal">
+      <a href="#/" data-r="">Inicio</a>
+      <a href="#/clases" data-r="clases">Clases</a>
+      <a href="#/talleres" data-r="talleres">Talleres</a>
+      <a href="#/rotaciones" data-r="rotaciones">Rotaciones</a>
+      <a href="#/multimedia" data-r="multimedia">Multimedia</a>
+      <a href="#/trabajos" data-r="trabajos">Trabajos</a>
+      <a href="#/extras" data-r="extras">Extras</a>
+    </nav>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <footer class="pie">
+    <p>Material de estudio personal, hecho a partir de mis apuntes de clase. No sustituye las guías clínicas ni la opinión de un médico. Los casos que menciono están anonimizados.</p>
+    <p id="pie-firma"></p>
+  </footer>
+
+  <noscript><p style="padding:2rem">Este blog necesita JavaScript activado para mostrar su contenido.</p></noscript>
+  <script>
+
+
+/* =====================================================================
+   CONTENIDO DEL BLOG  —  este es el ÚNICO archivo que necesitas editar.
+
+   CÓMO SUBIR TUS ARCHIVOS (PDF de Canva, fotos, videos)
+   ---------------------------------------------------------------------
+   1. Todo va junto a index.html, en la página principal de tu repositorio de GitHub
+      (Add file > Upload files, y arrastra tus archivos). No hace falta crear carpetas.
+      (Si prefieres una carpeta, créala y agrega aquí abajo, fuera de este comentario:  const CARPETA_ARCHIVOS = "archivos";)
+   2. Usa nombres SIN espacios, sin tildes y en minúscula:  clase-01.pdf  (no "Clase 1 final.pdf").
+
+   RESÚMENES DE CLASES (lo más fácil)
+   Descarga tu resumen de Canva como PDF y ponle este nombre exacto:
+        clase-01.pdf, clase-02.pdf ... clase-61.pdf     (el número es el que ves en la lista de clases)
+   Súbelo a la carpeta "archivos" y el blog lo detecta solo: la clase pasa a "Resumen listo"
+   y la página muestra la vista previa del PDF. No tienes que tocar este archivo.
+
+   BITÁCORA DE ROTACIÓN (igual de fácil)
+        bitacora-completa.pdf           (toda la rotación)
+        bitacora-semana-1.pdf  ...  bitacora-semana-4.pdf
+
+   TALLERES:  taller-1.pdf, taller-2.pdf ...   (en el orden de la lista TALLERES, más abajo)
+
+   OTRAS OPCIONES
+   - En vez de un PDF puedes pegar el enlace de Canva:  enlace: "https://www.canva.com/design/...".
+     (En Canva: Compartir > Ver enlace; asegúrate de que cualquiera con el enlace pueda verlo.)
+   - También sirven los enlaces de Google Drive (con permiso "cualquiera con el enlace").
+   - Si prefieres escribir el resumen aquí mismo como texto, mira el ejemplo en RESUMENES.
+
+   Reglas: el texto va entre comillas, cada bloque termina con coma, y no borres las llaves { }.
+   PRIVACIDAD: nada de nombres, iniciales, cédulas ni camas de pacientes en tus documentos ni fotos.
+   ===================================================================== */
+
+
+/* ---------- Inicio: sobre mí ---------- */
+const PERFIL = {
+  nombre: "Analia Torres",
+  blog: "Blog de Cirugía",
+  universidad: "Universidad de Panamá, Facultad de Medicina",
+  anio: "5.º año de Medicina",
+  materia: "Cirugía",
+  semestre: "2.º semestre 2026",
+  hospital: "Hospital Susana Jones",
+  foto: "analia.jpg",   // tu foto principal: súbela como archivos/analia.jpg (si no existe, se muestra un espacio para ella)
+  // Dos fotos más chiquitas para la tira de polaroids de la portada (opcionales; déjalas en "" si no tienes).
+  fotoPortada2: "",
+  fotoPortada3: "",
+  // Puedes escribir varios párrafos separados por una línea en blanco.
+  bio: `Soy estudiante de quinto año de Medicina en la Universidad de Panamá. Este blog es mi cuaderno de Cirugía: aquí dejo mis resúmenes de clase, los talleres, mis rotaciones y todo lo que voy aprendiendo entre pinzas y bisturís.
+
+Lo armo para estudiar mejor y, si le sirve a alguien más, mejor todavía.`,
+};
+
+
+/* ---------- Portada (la franja negra de arriba del inicio) ----------
+   Solo texto, sin fotos. Deja cualquiera de estas tres en "" para que
+   se arme sola a partir de tus datos de "Sobre mí".                     */
+const PORTADA = {
+  ojo: "",     // texto pequeño de arriba. Vacío = universidad + materia
+  linea1: "",  // título grande. Vacío = el nombre del blog
+  linea2: "Analia Torres · 10mo semestre",  // texto de abajo. Vacío = tu nombre + año + semestre
+};
+
+
+/* ---------- Inicio: centro de rotación ----------
+   El texto puede tener varios párrafos (deja una línea en blanco entre ellos).
+   Fotos: sube las imágenes junto a index.html y escribe sus nombres, por ejemplo  fotos: ["hospital1.jpg", "hospital2.jpg"]. */
+const CENTRO = {
+  titulo: "Mi centro de rotación",
+  nombre: "Hospital Susana Jones",
+  texto: `Hago mi rotación de Cirugía en el Hospital Susana Jones, durante cuatro semanas.
+
+Aquí voy a contar cómo es el centro, por qué servicios voy pasando y cómo se vive el día a día.`,
+  fotos: [],
+};
+
+
+/* ---------- Inicio: catedrático, asistentes y preceptores ----------
+   Cada uno tiene un espacio para su foto. Cuando tengas la foto, súbela junto a index.html
+   y escribe su nombre de archivo en  foto:  (ejemplo:  foto: "enrique.jpg" ).                */
+const EQUIPO = {
+  catedratico: [
+    { nombre: "Enrique Victoria", foto: "" },
+  ],
+  asistentes: [
+    { nombre: "Giacomo Zilippo", foto: "" },
+    { nombre: "Adrian Rujano", foto: "" },
+    { nombre: "Ricardo Gollini", foto: "" },
+    { nombre: "Theris Yancic", foto: "" },
+  ],
+  // Tres espacios para preceptores. Cuando sepas sus nombres, escríbelos aquí (y su foto, si quieres).
+  preceptores: [
+    { nombre: "", foto: "" },
+    { nombre: "", foto: "" },
+    { nombre: "", foto: "" },
+  ],
+};
+
+
+/* ---------- (Ya no se usa) Fotos de profesores de clases ----------
+   Los nombres salen solos de la lista de clases. Aquí solo agregas su foto o una nota (opcional).
+   Copia el nombre EXACTAMENTE como aparece en la lista de clases.                                  */
+const PROFES = {
+  // "Dr. Gerardo Victoria": { foto: "victoria.jpg", nota: "Cirugía general" },
+};
+
+
+/* ---------- Clases (normales y especiales, por semana) ----------
+   C(número, semana, "tema", "profesor")   /   C(número, semana, "tema", "profesor", "especial") */
+const C = (id, semana, tema, profe, tipo = "clase") => ({ id, semana, tema, profe, tipo });
+
+const CLASES = [
+  // Semana 1
+  C(1, 1, "Complicaciones en cirugía", "Dr. Enrique Victoria"),
+  C(2, 1, "Complicaciones sistémicas: riesgo y pausa", "Dr. Gerardo Victoria"),
+  C(3, 1, "ERAS", "Dr. Alfredo Matos"),
+  C(4, 1, "Nutrición en cirugía", "Dr. Alfredo Matos"),
+  C(5, 1, "Cicatrización de las heridas, diéresis y síntesis", "Dr. Néstor Vega Yuil"),
+  C(6, 1, "Infecciones en cirugía", "Dr. Néstor Vega Yuil"),
+  C(7, 1, "Líquidos y electrolitos", "Dr. Martin Vasquez"),
+  C(8, 1, "Trauma: mecanismo y respuesta metabólica", "Dr. Martin Vasquez"),
+
+  // Semana 2
+  C(9, 2, "Síndrome aórtico agudo", "Dr. Ubaldo Rivas", "especial"),
+  C(10, 2, "Cirugía menor y ambulatoria", "Dr. Gerardo Victoria"),
+  C(11, 2, "Asepsia y antisepsia", "Dr. Gerardo Victoria"),
+  C(12, 2, "Trauma abdominal", "Dr. Martin Vasquez"),
+  C(13, 2, "Trauma: cráneo, pelvis y extremidades", "Dr. Martin Vasquez"),
+  C(14, 2, "Cáncer de estómago", "Dra. Stephany Torres"),
+  C(15, 2, "Tumores de intestino delgado", "Dra. Stephany Torres"),
+  C(16, 2, "Manejo intensivo del paciente politraumatizado", "Dr. Martín Vásquez", "especial"),
+  C(17, 2, "Desbridamiento de heridas quirúrgicas", "Dr. Enrique Victoria"),
+  C(18, 2, "Trauma torácico", "Dr. Gerardo Victoria"),
+  C(19, 2, "Accesos vasculares", "Dr. Adrian Rujano", "especial"),
+
+  // Semana 3
+  C(20, 3, "Enfermedad de vías biliares I", "Dr. Inti Pérez C."),
+  C(21, 3, "Enfermedad de vías biliares II", "Dr. Inti Pérez C."),
+  C(22, 3, "Respuesta sistémica a la lesión y apoyo metabólico", "Dr. Alfredo Matos"),
+  C(23, 3, "Cuidados intensivos quirúrgicos: monitorización en UCI", "Dr. Alfredo Matos"),
+  C(24, 3, "Prioridades en la atención del trauma, ATLS, vía aérea y ventilación", "Dr. Néstor Vega"),
+  C(25, 3, "Shock y reanimación en trauma", "Dr. Martin Vasquez"),
+  C(26, 3, "Estómago: enfermedad úlcero-péptica y tumores benignos", "Dr. Alfredo Matos"),
+  C(27, 3, "Sangrado digestivo alto y hemorragia digestiva baja", "Dr. Alfredo Matos"),
+  C(28, 3, "Apendicitis aguda", "Dr. James Lindsay"),
+  C(29, 3, "Tumor carcinoide", "Dr. James Lindsay"),
+
+  // Semana 4
+  C(30, 4, "Cirugía torácica", "Dr. Ricardo Jaramillo"),
+  C(31, 4, "Pleura, pulmón y mediastino", "Dr. Ricardo Jaramillo / Dr. Gerardo Victoria"),
+  C(32, 4, "Cirugía vascular: enfermedades arteriales", "Dr. Gerardo Victoria"),
+  C(33, 4, "Cirugía vascular: enfermedades venosas", "Dr. Adrián Rujano"),
+  C(34, 4, "Hernias de la pared abdominal I", "Dra. Debbie Wong"),
+  C(35, 4, "Hernias de la pared abdominal II", "Dra. Debbie Wong"),
+  C(36, 4, "Enfermedad diverticular del colon y vólvulos", "Dr. Edgardo Arcia"),
+  C(37, 4, "Enfermedad inflamatoria intestinal", "Dr. Edgardo Arcia"),
+
+  // Semana 5
+  C(38, 5, "Abdomen agudo I", "Dr. Gerardo Victoria"),
+  C(39, 5, "Abdomen agudo II", "Dr. Gerardo Victoria"),
+  C(40, 5, "Imagenología en cirugía", "Dra. Debbie Wong"),
+  C(41, 5, "Hernias, ostomías y drenajes", "Dra. Debbie Wong"),
+  C(42, 5, "Enfermedades benignas y trastornos motores del esófago", "Dra. Hebe Angélica Avilés"),
+  C(43, 5, "Hernias de hiato y reflujo gastroesofágico", "Dra. Hebe Angélica Avilés"),
+  C(44, 5, "Psicología para cirujanos", "Dr. Luis G. Victoria", "especial"),
+  C(45, 5, "Ética en cirugía", "Dr. Enrique Victoria", "especial"),
+  C(46, 5, "Obstrucción intestinal", "Dra. Debbie Wong"),
+  C(47, 5, "Problemas médicos en pacientes quirúrgicos", "Dra. Debbie Wong"),
+
+  // Semana 6
+  C(48, 6, "Pancreatitis aguda y crónica", "Dr. Moisés Cukier"),
+  C(49, 6, "Neoplasias del páncreas", "Dr. Moisés Cukier"),
+  C(50, 6, "Lesiones benignas de la mama", "Dr. Pablo Duran"),
+  C(51, 6, "Tumores malignos de mama", "Dr. Pablo Duran"),
+  C(52, 6, "Lesiones en la piel", "Dr. Pablo Duran"),
+  C(53, 6, "Melanoma", "Dr. Pablo Duran"),
+  C(54, 6, "Hígado: enfermedades benignas y tumores", "Dra. Lizka Richards"),
+  C(55, 6, "Hipertensión portal, bazo, esplenectomía y trasplantes", "Dra. Lizka Richards"),
+
+  // Semana 7
+  C(56, 7, "Enfermedades del ano y recto", "Dr. Edgardo Arcia"),
+  C(57, 7, "Tumores de colon, ano y recto", "Dr. Edgardo Arcia"),
+  C(58, 7, "Tumores de cabeza y cuello", "Dr. Pablo Duran"),
+  C(59, 7, "Tumores de esófago", "Dr. Pablo Duran"),
+  C(60, 7, "Cirugía bariátrica metabólica y obesidad", "Dra. Debbie Wong"),
+  C(61, 7, "Secuelas de la cirugía gastroduodenal", "Dra. Debbie Wong"),
+  C(62, 7, "Enfermedades quirúrgicas pediátricas I", "Dr. Ramón A. Policart"),
+  C(63, 7, "Enfermedades quirúrgicas pediátricas II", "Dr. Ramón A. Policart"),
+  C(64, 7, "Anestesia práctica I", "Dr. Gustavo Ramboa"),
+  C(65, 7, "Anestesia práctica II", "Dr. Gustavo Ramboa"),
+  C(66, 7, "Endocrino: tiroides, paratiroides y suprarrenales", "Dr. Alfredo Matos"),
+  C(67, 7, "Ofidismo y mordedura humana", "Dr. Alfredo Matos"),
+  C(68, 7, "Cirugía plástica y reconstructiva I", "Dr. José Agustín Espino"),
+  C(69, 7, "Cirugía plástica y reconstructiva II", "Dr. José Agustín Espino"),
+  C(70, 7, "Cirugía basada en evidencias", "Dr. Moisés Cukier"),
+  C(71, 7, "Urgencias quirúrgicas: XABCDE", "Dr. Alberto Perdomo", "especial"),
+  C(72, 7, "Cirugía oncológica y su evolución", "Dr. José Manuel Fábrega", "especial"),
+  C(73, 7, "Cirugía robótica", "Dr. Barba", "especial"),
+  C(74, 7, "Cirugía endovascular", "Dr. Antezana", "especial"),
+];
+
+
+/* ---------- Resúmenes con opciones extra (todo es opcional) ----------
+   Lo normal es subir clase-NN.pdf y no escribir nada aquí. Usa este bloque solo si quieres:
+   un enlace de Canva, fotos en esa clase, o escribir el resumen como texto.
+
+   12: {
+     enlace: "https://www.canva.com/design/XXXX/YYYY/view",
+     fotos: ["clase12-1.jpg", "clase12-2.jpg"],
+     resumen: `Texto del resumen. Deja una línea en blanco entre párrafos.
+
+## Un subtítulo
+- Una viñeta
+- Otra viñeta
+
+Puedes usar **negrita** y *cursiva*.`,
+     claves: ["Punto clave 1", "Punto clave 2"],
+     perla: "Una perla clínica.",
+     preguntas: [ { p: "¿Pregunta?", r: "Respuesta." } ],
+   },                                                                                                  */
+const RESUMENES = {
+  // pdf: el resumen en PDF (el archivo va junto a index.html). Para agregar uno nuevo,
+  // basta con subir el PDF con el nombre clase-NN.pdf: el blog lo encuentra solo.
+  1: { pdf: "clase-01.pdf" },
+  2: { pdf: "clase-02.pdf" },
+  3: { pdf: "clase-03.pdf" },
+  4: { pdf: "clase-04.pdf" },
+  5: { pdf: "clase-05.pdf" },
+  6: { pdf: "clase-06.pdf" },
+  7: { pdf: "clase-07.pdf" },
+  8: { pdf: "clase-08.pdf" },
+  10: { pdf: "clase-10.pdf" },
+  12: { pdf: "clase-12.pdf" },
+  13: { pdf: "clase-13.pdf" },
+  14: { pdf: "clase-14.pdf" },
+  15: { pdf: "clase-15.pdf" },
+  16: { pdf: "clase-16.pdf" },
+  18: { pdf: "clase-18.pdf" },
+  20: { pdf: "clase-20.pdf" },
+  21: { pdf: "clase-21.pdf" },
+  22: { pdf: "clase-22.pdf" },
+  23: { pdf: "clase-23.pdf" },
+  24: { pdf: "clase-24.pdf" },
+  25: { pdf: "clase-25.pdf" },
+  26: { pdf: "clase-26.pdf" },
+  27: { pdf: "clase-27.pdf" },
+  28: { pdf: "clase-28.pdf" },
+  29: { pdf: "clase-29.pdf" },
+  30: { pdf: "clase-30.pdf" },
+  31: { pdf: "clase-31.pdf" },
+  32: { pdf: "clase-32.pdf" },
+  33: { pdf: "clase-33.pdf" },
+  34: { pdf: "clase-34.pdf" },
+  35: { pdf: "clase-35.pdf" },
+  36: { pdf: "clase-36.pdf" },
+  37: { pdf: "clase-37.pdf" },
+  38: { pdf: "clase-38.pdf" },
+  39: { pdf: "clase-39.pdf" },
+  40: { pdf: "clase-40.pdf" },
+  41: { pdf: "clase-41.pdf" },
+  42: { pdf: "clase-42.pdf" },
+  43: { pdf: "clase-43.pdf" },
+  46: { pdf: "clase-46.pdf" },
+  48: { pdf: "clase-48.pdf" },
+  49: { pdf: "clase-49.pdf" },
+  50: { pdf: "clase-50.pdf" },
+  51: { pdf: "clase-51.pdf" },
+  52: { pdf: "clase-52.pdf" },
+  53: { pdf: "clase-53.pdf" },
+  54: { pdf: "clase-54.pdf" },
+  55: { pdf: "clase-55.pdf" },
+  56: { pdf: "clase-56.pdf" },
+  57: { pdf: "clase-57.pdf" },
+  58: { pdf: "clase-58.pdf" },
+  59: { pdf: "clase-59.pdf" },
+  60: { pdf: "clase-60.pdf" },
+  61: { pdf: "clase-61.pdf" },
+  62: { pdf: "clase-62.pdf" },
+  63: { pdf: "clase-63.pdf" },
+  64: { pdf: "clase-64.pdf" },
+  65: { pdf: "clase-65.pdf" },
+  66: { pdf: "clase-66.pdf" },
+  67: { pdf: "clase-67.pdf" },
+  68: { pdf: "clase-68.pdf" },
+  69: { pdf: "clase-69.pdf" },
+  70: { pdf: "clase-70.pdf" },
+  71: { pdf: "clase-71.pdf" },
+  72: { pdf: "clase-72.pdf" },
+  73: { pdf: "clase-73.pdf" },
+  74: { pdf: "clase-74.pdf" },
+};
+
+
+/* ---------- Talleres ----------  (fotos: nombres de archivos dentro de "archivos") */
+const TALLERES = [
+  { tema: "Reto torácico", profe: "Dr. Gerardo Victoria", semana: 2, descripcion: "", archivo: "", enlace: "", fotos: [] },
+  // { tema: "Nombre del taller", profe: "Dr. ...", semana: 3, descripcion: "Qué hicimos.", archivo: "", enlace: "", fotos: ["taller2-1.jpg"] },
+];
+
+
+/* ---------- Rotaciones ---------- */
+const ROTACION = {
+  hospital: "Hospital Susana Jones",
+  bitacora: { archivo: "", enlace: "" },   // vacío = usa bitacora-completa.pdf si existe
+  fotos: [],                                // fotos generales de toda la rotación
+  // Cuando sepas por qué servicio vas a rotar, cambia "Servicio por definir".
+  semanas: [
+    { servicio: "Servicio por definir", nota: "", archivo: "", enlace: "", fotos: [] },
+    { servicio: "Servicio por definir", nota: "", archivo: "", enlace: "", fotos: [] },
+    { servicio: "Servicio por definir", nota: "", archivo: "", enlace: "", fotos: [] },
+    { servicio: "Servicio por definir", nota: "", archivo: "", enlace: "", fotos: [] },
+  ],
+};
+
+
+/* ---------- Multimedia (fotos y videos) ----------
+   tipo: "foto" o "video".
+   Fotos:  { tipo: "foto", archivo: "taller1.jpg", titulo: "Reto torácico", descripcion: "" }
+   Videos: { tipo: "video", enlace: "https://www.youtube.com/watch?v=XXXX", titulo: "..." }
+           { tipo: "video", archivo: "mi-video.mp4", titulo: "..." }   (máx. 25 MB desde la web de GitHub) */
+const MULTIMEDIA = [
+  // { tipo: "foto", archivo: "foto1.jpg", titulo: "Mi primera guardia", descripcion: "" },
+];
+
+
+/* ---------- Trabajos ----------
+   { titulo: "Caso clínico de apendicitis", descripcion: "De qué trata.", fecha: "Septiembre 2026",
+     archivo: "trabajo-apendicitis.pdf", enlace: "", fotos: [] } */
+const TRABAJOS = [
+  // { titulo: "", descripcion: "", fecha: "", archivo: "", enlace: "", fotos: [] },
+];
+
+
+/* ---------- Extras ----------
+   Lo que quieras: guías, algoritmos, resúmenes de otros temas, enlaces útiles, etc.
+   { titulo: "Nudos quirúrgicos", descripcion: "Guía rápida.", foto: "nudos.jpg", archivo: "nudos.pdf", enlace: "" } */
+const EXTRAS = [
+  // { titulo: "", descripcion: "", foto: "", archivo: "", enlace: "" },
+];
+
+
+
+
+/* Lógica del blog. No necesitas editar este archivo: todo el contenido está en contenido.js */
+(function () {
+  "use strict";
+
+  const app = document.getElementById("app");
+  const nav = document.getElementById("nav");
+
+  /* ---------- utilidades ---------- */
+  const $ = (s, el) => (el || document).querySelector(s);
+  const $$ = (s, el) => Array.prototype.slice.call((el || document).querySelectorAll(s));
+
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* sin almacenamiento: no pasa nada */ } },
+  };
+
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  // Formato sencillo para textos: párrafos, "## subtítulo", "- viñeta", **negrita**, *cursiva*
+  const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/(^|[^*])\*(?!\s)(.+?)\*(?!\*)/g, "$1<em>$2</em>");
+  function fmt(text) {
+    return String(text || "").trim().split(/\n\s*\n/).map((bloque) => {
+      const lineas = bloque.split("\n").map((l) => l.trim()).filter(Boolean);
+      if (!lineas.length) return "";
+      if (lineas[0].indexOf("## ") === 0) {
+        return "<h3>" + inline(lineas[0].slice(3)) + "</h3>" + (lineas.length > 1 ? fmt(lineas.slice(1).join("\n")) : "");
+      }
+      if (lineas.every((l) => /^[-•] /.test(l))) {
+        return "<ul>" + lineas.map((l) => "<li>" + inline(l.slice(2)) + "</li>").join("") + "</ul>";
+      }
+      return "<p>" + lineas.map(inline).join(" ") + "</p>";
+    }).join("");
+  }
+
+  const pl = (n, s, p) => n + " " + (n === 1 ? s : p);
+  const pad2 = (n) => (n < 10 ? "0" : "") + n;
+
+  /* ---------- archivos: rutas y detección ---------- */
+  // "clase-01.pdf" -> "archivos/clase-01.pdf". Si ya trae carpeta o es un enlace, se deja igual.
+  // Los archivos (PDF, fotos) van junto a index.html. Si prefieres una carpeta, en contenido.js escribe: const CARPETA_ARCHIVOS = "archivos";
+  const CARPETA = (typeof CARPETA_ARCHIVOS === "string" && CARPETA_ARCHIVOS) ? CARPETA_ARCHIVOS.replace(/\/+$/, "") + "/" : "";
+  function ruta(p) {
+    if (!p) return "";
+    p = String(p).trim();
+    if (p.slice(0, 5) === "data:") return p;
+    if (/^(https?:)?\/\//.test(p) || p.indexOf("/") > -1) return encodeURI(p);
+    return encodeURI(CARPETA + p);
+  }
+
+  const cacheExiste = {};
+  function existe(url) {
+    // En la vista previa local (archivo abierto directamente) no se puede detectar: solo funcionan los archivos escritos a mano.
+    if (location.protocol === "file:") return Promise.resolve(false);
+    if (url in cacheExiste) return cacheExiste[url];
+    cacheExiste[url] = fetch(url, { method: "HEAD", cache: "no-cache" }).then((r) => r.ok).catch(() => false);
+    return cacheExiste[url];
+  }
+
+  /* ---------- datos derivados ---------- */
+  const total = CLASES.length;
+  const semanasTotal = Math.max.apply(null, CLASES.map((c) => c.semana));
+  const byId = (id) => CLASES.find((c) => c.id === id);
+  const detectados = {};
+
+  const explicito = (id) => {
+    const r = RESUMENES[id];
+    return !!(r && (r.pdf || (r.hojas && r.hojas.length) || r.imagen || r.archivo || r.enlace || String(r.resumen || "").trim()));
+  };
+  const listo = (id) => explicito(id) || !!detectados[id];
+  const listosCount = () => CLASES.filter((c) => listo(c.id)).length;
+  const minutos = (txt) => Math.max(1, Math.round(String(txt).trim().split(/\s+/).length / 200));
+
+  function pintarEstados() {
+    $$("[data-est]").forEach((el) => {
+      const ok = listo(Number(el.getAttribute("data-est")));
+      el.className = "st " + (ok ? "ok" : "no");
+      el.textContent = ok ? "Resumen listo" : "En preparación";
+    });
+    const c = $("#cuenta");
+    if (c) c.textContent = listosCount() + " de " + total + " resúmenes listos";
+  }
+
+  function detectar() {
+    return Promise.all(CLASES.map((c) =>
+      existe(ruta("clase-" + pad2(c.id) + ".pdf")).then((ok) => { detectados[c.id] = ok; })
+    )).then(pintarEstados);
+  }
+
+  function profesores() {
+    const mapa = {};
+    const orden = [];
+    const agregar = (nombre, item, clave) => {
+      if (!mapa[nombre]) { mapa[nombre] = { nombre: nombre, clases: [], talleres: [] }; orden.push(nombre); }
+      mapa[nombre][clave].push(item);
+    };
+    CLASES.forEach((c) => agregar(c.profe, c, "clases"));
+    TALLERES.forEach((t) => agregar(t.profe, t, "talleres"));
+    return orden.map((n) => mapa[n]);
+  }
+  const iniciales = (nombre) => {
+    const p = String(nombre).replace(/^(Dr\.|Dra\.)\s*/i, "").split(/\s+/).filter(Boolean);
+    return ((p[0] || "?").charAt(0) + (p.length > 1 ? p[p.length - 1].charAt(0) : "")).toUpperCase();
+  };
+
+  /* ---------- fotos y galerías ---------- */
+  const CAMARA = '<svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><path d="M8 15h8l3-5h10l3 5h8a3 3 0 0 1 3 3v19a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V18a3 3 0 0 1 3-3z" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><circle cx="24" cy="27" r="7" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>';
+  const fotoVacia = (txt) => '<div class="foto-vacia">' + CAMARA + "<span>" + esc(txt || "Aquí va tu foto") + "</span></div>";
+  const imgHtml = (archivo, alt, vacio) => archivo
+    ? '<img src="' + esc(ruta(archivo)) + '" alt="' + esc(alt || "") + '" loading="lazy" data-fb="' + esc(vacio || "Aquí va tu foto") + '">'
+    : fotoVacia(vacio);
+
+  function galeria(fotos, vacias, alt) {
+    fotos = (fotos || []).filter(Boolean);
+    if (!fotos.length) {
+      if (!vacias) return "";
+      let s = '<div class="galeria">';
+      for (let i = 0; i < vacias; i++) s += '<div class="foto-cel">' + fotoVacia("Aquí va tu foto") + "</div>";
+      return s + "</div>";
+    }
+    return '<div class="galeria">' + fotos.map((f, i) =>
+      '<button type="button" class="foto" data-full="' + esc(ruta(f)) + '" data-cap="' + esc(alt || "") + '"><img src="' + esc(ruta(f)) + '" alt="' + esc((alt || "Foto") + " " + (i + 1)) + '" loading="lazy" data-fb="Foto no encontrada"></button>'
+    ).join("") + "</div>";
+  }
+
+  /* ---------- visor de documentos (PDF, Canva, Drive) ---------- */
+  function visorSlot(o) {
+    return '<div class="visor" data-a="' + esc(o.archivo || "") + '" data-e="' + esc(o.enlace || "") + '" data-auto="' + esc(o.auto || "") + '" data-t="' + esc(o.titulo || "Documento") + '" data-v="' + esc(o.vacio || "") + '"><p class="visor-carga">Cargando…</p></div>';
+  }
+
+  function barraVisor(src, t, etiqueta, descarga) {
+    return '<div class="visor-bar"><span class="visor-t">' + esc(t) + '</span><span class="visor-btns"><a class="btn peq" href="' + src + '" target="_blank" rel="noopener">' + etiqueta + "</a>" +
+      (descarga ? '<a class="btn peq ghost" href="' + src + '" download>Descargar</a>' : "") + "</span></div>";
+  }
+
+  function visorArchivo(src, t) {
+    const ext = (src.split("?")[0].split("#")[0].split(".").pop() || "").toLowerCase();
+    if (ext === "pdf") {
+      return barraVisor(src, t, "Abrir en pestaña nueva", true) +
+        '<iframe class="visor-frame" src="' + src + '#view=FitH" title="' + esc(t) + '" loading="lazy"></iframe>' +
+        '<p class="visor-nota">Si la vista previa no se ve bien en tu celular, toca «Abrir en pestaña nueva».</p>';
+    }
+    if (["png", "jpg", "jpeg", "webp", "gif"].indexOf(ext) > -1) {
+      return barraVisor(src, t, "Abrir en pestaña nueva", true) + '<img class="visor-img" src="' + src + '" alt="' + esc(t) + '">';
+    }
+    return barraVisor(src, t, "Abrir archivo", true);
+  }
+
+  function visorEnlace(url, t) {
+    const cv = /^https?:\/\/(www\.)?canva\.com\/design\/([^\/?#]+)\/([^\/?#]+)/.exec(url);
+    const dr = /drive\.google\.com\/file\/d\/([^\/?#]+)/.exec(url);
+    let embed = "";
+    if (cv) embed = "https://www.canva.com/design/" + cv[2] + "/" + cv[3] + "/view?embed";
+    else if (dr) embed = "https://drive.google.com/file/d/" + dr[1] + "/preview";
+    const etiqueta = cv ? "Abrir en Canva" : dr ? "Abrir en Drive" : "Abrir enlace";
+    return barraVisor(esc(url), t, etiqueta, false) + (embed ? '<iframe class="visor-frame" src="' + esc(embed) + '" title="' + esc(t) + '" loading="lazy" allowfullscreen></iframe>' : "");
+  }
+
+  async function montarVisor(el) {
+    const a = el.getAttribute("data-a"), e = el.getAttribute("data-e"), auto = el.getAttribute("data-auto");
+    const t = el.getAttribute("data-t"), vacio = el.getAttribute("data-v");
+    let src = a ? ruta(a) : "";
+    if (!src && !e && auto) { const r = ruta(auto); if (await existe(r)) src = r; }
+    if (src) el.innerHTML = visorArchivo(src, t);
+    else if (e) el.innerHTML = visorEnlace(e, t);
+    else if (vacio) el.innerHTML = '<div class="pendiente"><p>' + esc(vacio) + "</p></div>";
+    else el.innerHTML = "";
+  }
+
+  /* ---------- video ---------- */
+  function videoHtml(m) {
+    if (m.archivo) return '<video class="mm-video" controls preload="metadata" src="' + esc(ruta(m.archivo)) + '"></video>';
+    const u = String(m.enlace || "");
+    const yt = /(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{6,})/.exec(u);
+    const vm = /vimeo\.com\/(\d+)/.exec(u);
+    if (yt) return '<iframe class="mm-video" src="https://www.youtube-nocookie.com/embed/' + yt[1] + '" title="' + esc(m.titulo || "Video") + '" loading="lazy" allowfullscreen></iframe>';
+    if (vm) return '<iframe class="mm-video" src="https://player.vimeo.com/video/' + vm[1] + '" title="' + esc(m.titulo || "Video") + '" loading="lazy" allowfullscreen></iframe>';
+    return '<div class="mm-video enlace"><a class="btn" href="' + esc(u) + '" target="_blank" rel="noopener">Ver video</a></div>';
+  }
+
+  /* ---------- portada: valores por defecto (contenido.js puede cambiarlos con PORTADA.ojo / .linea1 / .linea2) ---------- */
+  const PORT = Object.assign({
+    ojo: "",              // texto pequeño de arriba; vacío = universidad + materia
+    linea1: PERFIL.blog,  // título grande
+    linea2: "",           // subtítulo; vacío = nombre + año + semestre
+  }, typeof PORTADA !== "undefined" ? PORTADA : {});
+
+  const CENTRO_DEF = {
+    titulo: "Mi centro de rotación",
+    nombre: "Hospital Susana Jones",
+    texto: "Hago mi rotación de Cirugía en el Hospital Susana Jones, durante cuatro semanas.\n\nAquí voy a contar cómo es el centro, por qué servicios voy pasando y cómo se vive el día a día.",
+    fotos: [],
+  };
+  const CENTRO_C = Object.assign({}, CENTRO_DEF, typeof CENTRO !== "undefined" ? CENTRO : {});
+
+  /* ---------- equipo: catedrático y asistentes (contenido.js puede cambiarlos) ---------- */
+  const EQ = typeof EQUIPO !== "undefined" ? EQUIPO : {
+    catedratico: [{ nombre: "Enrique Victoria", foto: "" }],
+    asistentes: [{ nombre: "Giacomo Zilippo", foto: "" }, { nombre: "Adrian Rujano", foto: "" }, { nombre: "Ricardo Gollini", foto: "" }, { nombre: "Theris Yancic", foto: "" }],
+  };
+  if (!EQ.preceptores) EQ.preceptores = [{ nombre: "", foto: "" }, { nombre: "", foto: "" }, { nombre: "", foto: "" }];
+  const sinTitulo = (n) => String(n).replace(/^(Dr\.|Dra\.)\s*/i, "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  const fotoEquipo = (nombre) => {
+    const todos = (EQ.catedratico || []).concat(EQ.asistentes || []);
+    const m = todos.find((x) => sinTitulo(x.nombre) === sinTitulo(nombre));
+    return m && m.foto ? m.foto : "";
+  };
+
+  /* ---------- estado ---------- */
+  let rotTab = 0;
+  let mmFiltro = "todo";
+
+  /* ---------- piezas comunes ---------- */
+  function cab(h1, sub, extra, antes) {
+    return '<section class="banda sec cab"><span class="doodle d-cab" aria-hidden="true">' + DOODLE_SUTURA + '</span><div class="wrap">' + (antes || "") + '<div class="tit"><h1>' + h1 + "</h1>" + (sub ? '<p class="sub">' + sub + "</p>" : "") + "</div>" + (extra || "") + "</div></section>";
+  }
+  const vacioPag = (txt) => '<p class="vacio-simple">' + txt + "</p>";
+
+  /* ---------- INICIO ---------- */
+  function viewHome() {
+    const tarjEquipo = (lista, rol) => (lista || []).map((x) => {
+      const av = x.foto
+        ? '<span class="avatar grande"><img src="' + esc(ruta(x.foto)) + '" alt="' + esc(x.nombre) + '" loading="lazy" data-fb-avatar="' + esc(iniciales(x.nombre)) + '"></span>'
+        : '<span class="avatar grande vacio-av" role="img" aria-label="Espacio para una foto">' + CAMARA + "<small>Aquí va la foto</small></span>";
+      return '<li class="prof">' + av + '<span class="prof-n' + (x.nombre ? "" : " sin-nombre") + '">' + esc(x.nombre || "Nombre por definir") + '</span><span class="prof-d">' + rol + "</span></li>";
+    }).join("");
+
+    const atajos = [
+      ["#/clases", "Clases", pl(total, "clase", "clases") + " en " + pl(semanasTotal, "semana", "semanas")],
+      ["#/talleres", "Talleres", pl(TALLERES.length, "taller", "talleres")],
+      ["#/rotaciones", "Rotaciones", pl(ROTACION.semanas.length, "semana", "semanas") + " en el " + ROTACION.hospital],
+      ["#/multimedia", "Multimedia", "Fotos y videos"],
+      ["#/trabajos", "Trabajos", TRABAJOS.length ? pl(TRABAJOS.length, "trabajo", "trabajos") : "Mis trabajos de la materia"],
+      ["#/extras", "Extras", "Guías y material aparte"],
+    ].map((a) => '<li><a class="atajo" href="' + a[0] + '"><b>' + esc(a[1]) + "</b><span>" + esc(a[2]) + "</span></a></li>").join("");
+
+    return (
+      portadaHtml() +
+
+      '<section class="banda sec" id="sobre"><div class="wrap sobre-mi"><div class="retrato">' + imgHtml(PERFIL.foto, "Foto de " + PERFIL.nombre, "Aquí va tu foto") + "</div>" +
+      '<div><div class="tit"><h2>Sobre mí</h2><p class="sub">' + esc(PERFIL.nombre) + "</p></div>" +
+      '<div class="texto-bio">' + fmt(PERFIL.bio) + "</div></div></div></section>" +
+
+      '<section class="banda sec" id="centro"><div class="wrap centro"><div><div class="tit"><h2>' + esc(CENTRO_C.titulo) + '</h2><p class="sub">' + esc(CENTRO_C.nombre) + "</p></div>" +
+      '<div class="texto-bio">' + fmt(CENTRO_C.texto) + '</div><p style="margin-top:1.4rem"><a class="btn" href="#/rotaciones">Ver mi diario de rotación</a></p></div>' +
+      '<div>' + galeria(CENTRO_C.fotos, 3, "Fotos de " + CENTRO_C.nombre) + "</div></div></section>" +
+
+      '<section class="banda sec" id="profes"><div class="wrap"><div class="tit"><h2>Mis profesores</h2><p class="sub">Quienes me acompañaron en Cirugía este semestre.</p></div>' +
+      '<h3 class="sub-h">Catedrático</h3><ul class="profes equipo-l">' + tarjEquipo(EQ.catedratico, "Catedrático") + "</ul>" +
+      '<h3 class="sub-h">Asistentes</h3><ul class="profes equipo-l">' + tarjEquipo(EQ.asistentes, "Asistente") + "</ul>" +
+      '<h3 class="sub-h">Preceptores</h3><ul class="profes equipo-l">' + tarjEquipo(EQ.preceptores, "Preceptor") + "</ul></div></section>" +
+
+      '<section class="banda sec"><div class="wrap"><div class="tit"><h2>Explora el diario</h2><p class="sub">Todo lo que hay aquí, por secciones.</p></div><ul class="atajos">' + atajos + "</ul></div></section>"
+    );
+  }
+
+  // Portada formal: fondo negro, tipografía, sin fotos. El diseño vive en la sección
+  // "PORTADA FORMAL" de estilos.css; aquí solo se arma el texto.
+  function portadaHtml() {
+    const P = PORT;
+    return (
+      '<section class="portada portada-formal" id="portada">' +
+      '<div class="pf-textura" aria-hidden="true"></div>' +
+      '<div class="wrap pf-fila">' +
+      '<div class="pf-tira">' +
+      '<div class="pf-polaroid pf-polaroid-chica pf-polaroid-arriba">' + imgHtml(PERFIL.fotoPortada2, "Foto de " + PERFIL.nombre, "Foto") + "</div>" +
+      '<div class="pf-polaroid pf-polaroid-grande">' + imgHtml(PERFIL.foto, "Foto de " + PERFIL.nombre, "Pon aquí tu foto") + "</div>" +
+      '<div class="pf-polaroid pf-polaroid-chica pf-polaroid-abajo">' + imgHtml(PERFIL.fotoPortada3, "Foto de " + PERFIL.nombre, "Foto") + "</div>" +
+      "</div>" +
+      '<div class="pf-cont">' +
+      '<p class="pf-ojo">' + String(P.ojo || PERFIL.universidad).split(/,\s*/).map((x, i, a) => '<span class="ojo-l">' + esc(x) + (i < a.length - 1 ? "," : "") + '</span>').join(" ") + '</p>' +
+      '<h1 class="pf-titulo">' + esc(P.linea1 || PERFIL.blog) + '</h1>' +
+      '<p class="pf-raya" aria-hidden="true"><span></span></p>' +
+      '<p class="pf-sub">' + (P.linea2 ? esc(P.linea2) : [PERFIL.nombre, PERFIL.anio, PERFIL.semestre].map((x, i, a) => '<span class="seg">' + esc(x) + (i < a.length - 1 ? " ·" : "") + '</span>').join(" ")) + '</p>' +
+      "</div></div>" +
+      '<button type="button" class="pf-bajar" id="bajar-p" aria-label="Bajar a la siguiente sección">' + FLECHA_ABAJO + '</button>' +
+      '</section>'
+    );
+  }
+
+  /* ---------- Un pequeño hilo de sutura decorativo para las cabeceras de página ---------- */
+  const DOODLE_SUTURA = '<svg viewBox="0 0 140 50" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M4 25 C 20 5, 36 45, 52 25 S 84 5, 100 25 S 132 45, 136 25"/><circle cx="4" cy="25" r="3" fill="currentColor" stroke="none"/><circle cx="136" cy="25" r="3" fill="currentColor" stroke="none"/></svg>';
+
+  const FLECHA_ABAJO = '<svg width="22" height="22" viewBox="0 0 30 30" aria-hidden="true"><path d="M15 4v21M6 16l9 10 9-10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  const reducir = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function iniciarPortada() {
+    const p = $("#portada");
+    if (!p) return;
+    requestAnimationFrame(() => p.classList.add("lista"));
+    const b = $("#bajar-p", p);
+    if (b) b.addEventListener("click", () => { const t = $("#sobre"); if (t && t.scrollIntoView) t.scrollIntoView({ behavior: reducir() ? "auto" : "smooth" }); });
+  }
+
+  function bindHome() {
+    iniciarPortada();
+
+    // Las secciones aparecen suavemente al llegar a ellas
+    if ("IntersectionObserver" in window && !reducir()) {
+      const io = new IntersectionObserver((entradas) => {
+        entradas.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visto"); io.unobserve(en.target); } });
+      }, { threshold: 0.12 });
+      $$("#app > section:not(.portada), .prof, .atajos li").forEach((el, i) => {
+        el.classList.add("revela");
+        if (el.matches(".prof, .atajos li")) el.style.setProperty("--d", (i % 4) * 70 + "ms");
+        io.observe(el);
+      });
+    }
+  }
+
+  /* ---------- CLASES ---------- */
+  function rowHtml(c) {
+    const ok = listo(c.id);
+    return (
+      '<li><a class="row" href="#/clase/' + c.id + '"><span class="n">' + c.id + "</span>" +
+      '<span class="t"><b>' + esc(c.tema) + "</b><small>" + esc(c.profe) + "</small></span>" +
+      '<span class="est"><span class="st ' + (ok ? "ok" : "no") + '" data-est="' + c.id + '">' + (ok ? "Resumen listo" : "En preparación") + "</span></span></a></li>"
+    );
+  }
+
+  function viewClases() {
+    let semanas = "";
+    for (let s = 1; s <= semanasTotal; s++) {
+      const lista = CLASES.filter((c) => c.semana === s);
+      if (!lista.length) continue;
+      semanas += '<section class="sem"><h2><span class="hl">Semana ' + s + "</span><small>" + pl(lista.length, "tema", "temas") + "</small></h2><ol>" + lista.map(rowHtml).join("") + "</ol></section>";
+    }
+    return (
+      cab("Clases", "Las clases y las clases especiales del semestre, semana por semana. Toca un tema para ver mi resumen.",
+        '<div class="pills"><span class="pill azul" id="cuenta">' + listosCount() + " de " + total + " resúmenes listos</span></div>") +
+      '<div class="wrap pagina">' + semanas + "</div>"
+    );
+  }
+
+  function viewClase(id) {
+    const c = byId(id);
+    if (!c) return viewNoEncontrado();
+    const R = RESUMENES[id] || {};
+    const texto = String(R.resumen || "").trim();
+    const prev = byId(id - 1), next = byId(id + 1);
+    const checks = (store.get("claves", {})[id]) || [];
+
+    if (R.hojas && R.hojas.length && !R.imagen) R.imagen = R.hojas[0];
+    const npag = R.hojas && R.hojas.length ? R.hojas.length : 1;
+    let cuerpo = R.pdf
+      ? '<figure class="res-hoja res-pdf" data-n="1"><div class="visor-bar solo-btn"><span class="visor-btns"><button type="button" class="btn peq" data-hoja>Ver en grande</button></span></div>' +
+        '<div class="hp">' +
+        '<button type="button" class="res-hoja-img hp-vista" data-hoja aria-label="Ver el resumen en grande"><canvas width="1241" height="1755" role="img" aria-label="' + esc("Resumen de la clase: " + c.tema) + '"></canvas><span class="hp-cargando">Cargando resumen…</span></button>' +
+        '<button type="button" class="hp-flecha hp-ant" data-paso="-1" aria-label="Página anterior" disabled>‹</button><button type="button" class="hp-flecha hp-sig" data-paso="1" aria-label="Página siguiente" disabled>›</button>' +
+        '</div>' +
+        '<figcaption><span class="hp-cont" aria-live="polite"></span> Usa las flechas para pasar de página. Toca la hoja para verla en grande.</figcaption></figure>'
+      : R.imagen
+      ? '<figure class="res-hoja" data-n="' + npag + '"><div class="visor-bar solo-btn"><span class="visor-btns"><button type="button" class="btn peq" data-hoja="' + ruta(R.imagen) + '">Ver en grande</button></span></div>' +
+        '<div class="hp">' +
+        '<button type="button" class="res-hoja-img hp-vista" data-hoja="' + ruta(R.imagen) + '" aria-label="Ver el resumen en grande"><img src="' + ruta(R.imagen) + '" alt="' + esc("Resumen de la clase: " + c.tema) + '" decoding="async"></button>' +
+        (npag > 1 ? '<button type="button" class="hp-flecha hp-ant" data-paso="-1" aria-label="Página anterior">‹</button><button type="button" class="hp-flecha hp-sig" data-paso="1" aria-label="Página siguiente">›</button>' : '') +
+        '</div>' +
+        '<figcaption>' + (npag > 1 ? '<span class="hp-cont" aria-live="polite">Página 1 de ' + npag + '</span> · Usa las flechas para pasar de página. ' : '') + 'Toca la hoja para verla en grande.</figcaption></figure>'
+      : visorSlot({
+        archivo: R.archivo, enlace: R.enlace, auto: "clase-" + pad2(id) + ".pdf", titulo: "Resumen: " + c.tema,
+        vacio: texto ? "" : "Este resumen todavía está en preparación. Estoy pasando en limpio mis apuntes de esta clase.",
+      });
+    if (texto) cuerpo += '<div class="cuerpo">' + fmt(texto) + "</div>";
+    if (R.perla) cuerpo += '<div class="perla"><h4>Perla clínica</h4><p>' + inline(R.perla) + "</p></div>";
+    if (R.preguntas && R.preguntas.length) {
+      cuerpo += '<section class="flash"><h2>Ponte a prueba</h2><p>Piensa la respuesta primero y luego toca la tarjeta.</p><div class="fcs">' +
+        R.preguntas.map((q) => '<button type="button" class="fc" aria-expanded="false"><span class="q">' + esc(q.p) + '</span><span class="r">' + inline(q.r) + '</span><span class="hint">Toca para ver la respuesta</span></button>').join("") +
+        "</div></section>";
+    }
+    if (R.fotos && R.fotos.length) cuerpo += '<section class="flash"><h2>Fotos</h2>' + galeria(R.fotos, 0, c.tema) + "</section>";
+
+    let lado = '<div class="ficha"><h2>Datos de la clase</h2><dl><dt>Profesor</dt><dd>' + esc(c.profe) + "</dd><dt>Semana</dt><dd>" + c.semana + "</dd><dt>Clase</dt><dd>" + c.id + " de " + total + "</dd>" +
+      (texto ? "<dt>Lectura</dt><dd>" + minutos(texto) + " min</dd>" : "") + "</dl></div>";
+    if (R.claves && R.claves.length) {
+      lado += '<div class="ficha"><h2>Puntos clave</h2><ul class="claves">' +
+        R.claves.map((k, i) => '<li><label><input type="checkbox" data-i="' + i + '"' + (checks.indexOf(i) > -1 ? " checked" : "") + "><span>" + inline(k) + "</span></label></li>").join("") + "</ul></div>";
+    }
+    const pills = '<div class="pills"><span class="pill azul">Semana ' + c.semana + '</span><span class="pill oscura">Clase ' + c.id + " de " + total + "</span>" + (c.tipo === "especial" ? '<span class="pill">Clase especial</span>' : "") + "</div>";
+    return (
+      cab(esc(c.tema), esc(c.profe), pills, '<a class="back" href="#/clases">Volver a las clases</a>') +
+      '<article class="wrap pagina"><div class="cols"><div>' + cuerpo + '</div><aside class="lado" aria-label="Datos y repaso">' + lado + "</aside></div>" +
+      '<nav class="pn" aria-label="Clase anterior y siguiente">' +
+      (prev ? '<a href="#/clase/' + prev.id + '"><small><span class="pn-fl" aria-hidden="true">←</span> Anterior</small><b>' + esc(prev.tema) + "</b></a>" : "<span></span>") +
+      (next ? '<a class="sig" href="#/clase/' + next.id + '"><small>Siguiente <span class="pn-fl" aria-hidden="true">→</span></small><b>' + esc(next.tema) + "</b></a>" : "") +
+      "</nav></article>"
+    );
+  }
+
+  /* Las hojas de resumen son una sola imagen con todas las páginas apiladas
+     (cada página 1241×1755 px, con 28 px de separación). Para mostrar una sola
+     página, se recorta la imagen con un marco del tamaño de una página. */
+  const PAG_H = 1755, PAG_GAP = 28;
+  /* d = 1 (siguiente) o -1 (anterior): la página actual sale hacia un lado y la nueva entra por el otro */
+  /* Cambia a la página k (cada página es su propia imagen, en img._hojas).
+     d = 1 (siguiente) o -1 (anterior): la página actual sale hacia un lado y la nueva entra por el otro */
+  /* ---------- Lector de PDF (PDF.js): dibuja una página del PDF, nítida a cualquier zoom ---------- */
+  const PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+  let pdfjsPromesa = null;
+  function cargarPdfjs() {
+    if (window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+    if (!pdfjsPromesa) pdfjsPromesa = new Promise((ok, mal) => {
+      const sc = document.createElement("script");
+      sc.src = PDFJS + "pdf.min.js";
+      sc.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + "pdf.worker.min.js"; ok(window.pdfjsLib); };
+      sc.onerror = () => { pdfjsPromesa = null; mal(new Error("No cargó el lector de PDF")); };
+      document.head.appendChild(sc);
+    });
+    return pdfjsPromesa;
+  }
+  const pdfAbiertos = {};
+  function abrirPdf(url) {
+    if (!pdfAbiertos[url]) pdfAbiertos[url] = cargarPdfjs().then((lib) => lib.getDocument({
+      url, cMapUrl: PDFJS + "cmaps/", cMapPacked: true, standardFontDataUrl: PDFJS + "standard_fonts/",
+    }).promise).catch((e) => { delete pdfAbiertos[url]; throw e; });
+    return pdfAbiertos[url];
+  }
+  // Dibuja la página k del PDF en el canvas, al ancho en pantalla del canvas (multiplicado por la densidad de la pantalla)
+  function pintarPdf(canvas, k) {
+    const turno = (canvas._turno = (canvas._turno || 0) + 1);
+    return abrirPdf(canvas._pdf).then((pdf) => pdf.getPage(k + 1)).then((pag) => {
+      const base = pag.getViewport({ scale: 1 });
+      const ancho = Math.max(200, canvas.clientWidth || (canvas.parentElement && canvas.parentElement.clientWidth) || 800);
+      let esc = (ancho * Math.min(window.devicePixelRatio || 1, 3)) / base.width;
+      const maxPx = 16000000; // límite de tamaño de lienzo en iPhone
+      if (base.width * base.height * esc * esc > maxPx) esc = Math.sqrt(maxPx / (base.width * base.height));
+      const vp = pag.getViewport({ scale: esc });
+      const tmp = document.createElement("canvas");
+      tmp.width = Math.floor(vp.width); tmp.height = Math.floor(vp.height);
+      return pag.render({ canvasContext: tmp.getContext("2d"), viewport: vp }).promise.then(() => {
+        if (turno !== canvas._turno) return;
+        canvas.width = tmp.width; canvas.height = tmp.height;
+        canvas.getContext("2d").drawImage(tmp, 0, 0);
+        canvas._k = k;
+        const cargando = canvas.parentElement && canvas.parentElement.querySelector(".hp-cargando");
+        if (cargando) cargando.remove();
+      });
+    }).catch(() => {
+      const cargando = canvas.parentElement && canvas.parentElement.querySelector(".hp-cargando");
+      if (cargando) cargando.textContent = "No se pudo cargar el resumen. Revisa tu conexión y vuelve a abrir la clase.";
+    });
+  }
+  function moverPaginaPdf(canvas, k, d) {
+    if (canvas.getAnimations) canvas.getAnimations().forEach((a) => a.cancel());
+    const quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!d || quieto || !canvas.animate) return pintarPdf(canvas, k);
+    const sale = canvas.animate([{ transform: "translateX(0)", opacity: 1 }, { transform: "translateX(" + (-d * 100) + "%)", opacity: .4 }], { duration: 170, easing: "ease-in", fill: "forwards" });
+    sale.onfinish = () => {
+      pintarPdf(canvas, k).then(() => {
+        sale.cancel();
+        canvas.animate([{ transform: "translateX(" + (d * 100) + "%)", opacity: .4 }, { transform: "translateX(0)", opacity: 1 }], { duration: 230, easing: "ease-out" });
+      });
+    };
+  }
+
+  function moverPagina(img, k, n, d) {
+    if (img.tagName === "CANVAS") return moverPaginaPdf(img, k, d);
+    const L = img._hojas || [];
+    const nueva = L[k];
+    if (!nueva) return;
+    if (img.getAnimations) img.getAnimations().forEach((a) => a.cancel());
+    img.style.transform = "";
+    [k + 1, k - 1].forEach((j) => { if (L[j]) { const pre = new Image(); pre.src = L[j]; } });
+    const quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!d || quieto || !img.animate) { if (img.getAttribute("src") !== nueva) img.src = nueva; return; }
+    const sale = img.animate([{ transform: "translateX(0)", opacity: 1 }, { transform: "translateX(" + (-d * 100) + "%)", opacity: .4 }], { duration: 170, easing: "ease-in", fill: "forwards" });
+    sale.onfinish = () => {
+      let hecho = false;
+      const entra = () => {
+        if (hecho) return; hecho = true;
+        sale.cancel();
+        img.animate([{ transform: "translateX(" + (d * 100) + "%)", opacity: .4 }, { transform: "translateX(0)", opacity: 1 }], { duration: 230, easing: "ease-out" });
+      };
+      img.addEventListener("load", entra, { once: true });
+      img.addEventListener("error", entra, { once: true });
+      img.src = nueva;
+      if (img.complete && img.naturalWidth) entra();
+      setTimeout(entra, 1500);
+    };
+  }
+
+  /* Visor a pantalla completa (dentro de la misma página), con zoom y páginas */
+  function abrirHoja(hojas, titulo, n, k0) {
+    const niveles = [1, 1.5, 2, 3];
+    let z = 0, k = k0 || 0;
+    n = Math.max(1, n || 1);
+    const esPdf = typeof hojas === "string";
+    const src = esPdf ? "" : (hojas[k] || hojas[0]);
+    const caja = document.createElement("div");
+    caja.className = "hoja-lb";
+    caja.setAttribute("role", "dialog");
+    caja.setAttribute("aria-modal", "true");
+    caja.setAttribute("aria-label", titulo || "Resumen");
+    caja.innerHTML =
+      '<div class="hoja-lb-bar"><span class="hoja-lb-t"></span>' +
+      '<button type="button" data-z="-1" aria-label="Alejar">−</button><button type="button" data-z="1" aria-label="Acercar">+</button>' +
+      '<button type="button" class="hoja-lb-x" aria-label="Cerrar">✕</button></div>' +
+      '<div class="hoja-lb-scroll"><div class="hoja-lb-marco">' + (esPdf ? '<canvas width="1241" height="1755"></canvas>' : '<img src="' + src + '" alt="">') + '</div></div>' +
+      (n > 1 ? '<div class="hoja-lb-pie"><button type="button" data-p="-1" aria-label="Página anterior">‹</button><span class="hoja-lb-cont" aria-live="polite"></span><button type="button" data-p="1" aria-label="Página siguiente">›</button></div>' : '');
+    const img = caja.querySelector(esPdf ? "canvas" : "img"), sc = caja.querySelector(".hoja-lb-scroll"), marco = caja.querySelector(".hoja-lb-marco");
+    if (esPdf) img._pdf = hojas; else img._hojas = hojas;
+    const aplicarZoom = () => {
+      const cx = (sc.scrollLeft + sc.clientWidth / 2) / (sc.scrollWidth || 1);
+      const cy = (sc.scrollTop + sc.clientHeight / 2) / (sc.scrollHeight || 1);
+      marco.style.width = (niveles[z] * 100) + "%";
+      marco.classList.toggle("ampliado", z > 0);
+      sc.scrollLeft = cx * sc.scrollWidth - sc.clientWidth / 2;
+      sc.scrollTop = cy * sc.scrollHeight - sc.clientHeight / 2;
+      caja.querySelector('[data-z="-1"]').disabled = z === 0;
+      caja.querySelector('[data-z="1"]').disabled = z === niveles.length - 1;
+      if (esPdf) { clearTimeout(img._rz); img._rz = setTimeout(() => pintarPdf(img, k), 60); }
+    };
+    const aplicarPag = (d) => {
+      moverPagina(img, k, n, d);
+      sc.scrollTop = 0;
+      if (n > 1) {
+        caja.querySelector(".hoja-lb-cont").textContent = "Página " + (k + 1) + " de " + n;
+        caja.querySelector('[data-p="-1"]').disabled = k === 0;
+        caja.querySelector('[data-p="1"]').disabled = k === n - 1;
+      }
+    };
+    const cerrar = () => { caja.remove(); document.body.style.overflow = ""; document.removeEventListener("keydown", tecla); };
+    const ir = (d) => { const nk = Math.max(0, Math.min(n - 1, k + d)); if (nk !== k) { k = nk; aplicarPag(d); } };
+    const tecla = (e) => { if (e.key === "Escape") cerrar(); else if (e.key === "ArrowRight") ir(1); else if (e.key === "ArrowLeft") ir(-1); };
+    caja.querySelectorAll("[data-z]").forEach((b) => b.addEventListener("click", () => {
+      z = Math.max(0, Math.min(niveles.length - 1, z + Number(b.getAttribute("data-z")))); aplicarZoom();
+    }));
+    caja.querySelectorAll("[data-p]").forEach((b) => b.addEventListener("click", () => ir(Number(b.getAttribute("data-p")))));
+    deslizar(sc, (d) => { if (z === 0) ir(d); });
+    caja.querySelector(".hoja-lb-x").addEventListener("click", cerrar);
+    document.addEventListener("keydown", tecla);
+    document.body.appendChild(caja);
+    document.body.style.overflow = "hidden";
+    aplicarZoom(); aplicarPag();
+    caja.querySelector(".hoja-lb-x").focus();
+  }
+
+  /* Deslizar el dedo a izquierda/derecha para pasar de página */
+  function deslizar(el, fn) {
+    let x0 = null, y0 = 0;
+    el.addEventListener("touchstart", (e) => { if (e.touches.length === 1) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } else x0 = null; }, { passive: true });
+    el.addEventListener("touchend", (e) => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) fn(dx < 0 ? 1 : -1);
+    }, { passive: true });
+  }
+
+  function bindClase(id) {
+    const hojaPdf = $(".res-pdf");
+    if (hojaPdf) {
+      const R0 = RESUMENES[id] || {};
+      const url = ruta(R0.pdf);
+      const cv = hojaPdf.querySelector(".hp-vista canvas");
+      cv._pdf = url;
+      let n = 1, k = 0;
+      const pintar = (d) => {
+        moverPagina(cv, k, n, d);
+        const cont = hojaPdf.querySelector(".hp-cont");
+        if (cont) cont.textContent = n > 1 ? "Página " + (k + 1) + " de " + n + " ·" : "";
+        hojaPdf.querySelector(".hp-ant").disabled = k === 0;
+        hojaPdf.querySelector(".hp-sig").disabled = k >= n - 1;
+      };
+      const ir = (d) => { const nk = Math.max(0, Math.min(n - 1, k + d)); if (nk !== k) { k = nk; pintar(d); } };
+      hojaPdf.querySelectorAll("[data-paso]").forEach((b) => b.addEventListener("click", () => ir(Number(b.getAttribute("data-paso")))));
+      deslizar(hojaPdf.querySelector(".hp"), ir);
+      hojaPdf.querySelectorAll("[data-hoja]").forEach((b) => b.addEventListener("click", () => {
+        const c = byId(id);
+        abrirHoja(url, c ? "Resumen: " + c.tema : "Resumen", n, k);
+      }));
+      abrirPdf(url).then((pdf) => { n = pdf.numPages; pintar(); }).catch(() => pintar());
+    } else if (!explicito(id)) {
+      // Resumen nuevo subido como clase-NN.pdf (sin escribir nada en el código): se detecta y se muestra
+      const nombre = "clase-" + pad2(id) + ".pdf";
+      existe(ruta(nombre)).then((ok) => { if (ok && location.hash.indexOf("/clase/" + id) > -1) { RESUMENES[id] = Object.assign({}, RESUMENES[id], { pdf: nombre }); render(); } });
+    }
+    const hoja = $(".res-hoja:not(.res-pdf)");
+    if (hoja) {
+      const n = Number(hoja.getAttribute("data-n")) || 1;
+      const img = hoja.querySelector(".hp-vista img");
+      const R0 = RESUMENES[id] || {};
+      const lista = (R0.hojas && R0.hojas.length ? R0.hojas : [R0.imagen]).filter(Boolean).map(ruta);
+      img._hojas = lista;
+      let k = 0;
+      const pintar = (d) => {
+        moverPagina(img, k, n, d);
+        const cont = hoja.querySelector(".hp-cont");
+        if (cont) cont.textContent = "Página " + (k + 1) + " de " + n;
+        const a = hoja.querySelector(".hp-ant"), s2 = hoja.querySelector(".hp-sig");
+        if (a) a.disabled = k === 0;
+        if (s2) s2.disabled = k === n - 1;
+      };
+      const ir = (d) => { const nk = Math.max(0, Math.min(n - 1, k + d)); if (nk !== k) { k = nk; pintar(d); } };
+      hoja.querySelectorAll("[data-paso]").forEach((b) => b.addEventListener("click", () => ir(Number(b.getAttribute("data-paso")))));
+      deslizar(hoja.querySelector(".hp"), ir);
+      hoja.querySelectorAll("[data-hoja]").forEach((b) => b.addEventListener("click", () => {
+        const c = byId(id);
+        abrirHoja(lista, c ? "Resumen: " + c.tema : "Resumen", n, k);
+      }));
+      pintar();
+    }
+    $$(".fc").forEach((b) => b.addEventListener("click", () => b.setAttribute("aria-expanded", b.getAttribute("aria-expanded") === "true" ? "false" : "true")));
+    $$(".claves input").forEach((cb) => cb.addEventListener("change", () => {
+      const todo = store.get("claves", {});
+      todo[id] = $$(".claves input").filter((x) => x.checked).map((x) => Number(x.getAttribute("data-i")));
+      store.set("claves", todo);
+    }));
+  }
+
+  /* ---------- TALLERES ---------- */
+  function viewTalleres() {
+    const cuerpo = TALLERES.length ? TALLERES.map((t, i) =>
+      '<section class="taller"><div class="tit"><h2>' + esc(t.tema) + '</h2><p class="sub">' + esc(t.profe) + "</p></div>" +
+      '<div class="pills">' + (t.semana ? '<span class="pill azul">Semana ' + t.semana + "</span>" : "") + '<span class="pill oscura">Taller ' + (i + 1) + "</span></div>" +
+      '<div class="dos-taller"><div>' + (t.descripcion ? '<div class="cuerpo">' + fmt(t.descripcion) + "</div>" : "") +
+      visorSlot({ archivo: t.archivo, enlace: t.enlace, auto: "taller-" + (i + 1) + ".pdf", titulo: "Taller: " + t.tema, vacio: "El material de este taller todavía está en preparación." }) +
+      "</div><div>" + galeria(t.fotos, 2, t.tema) + "</div></div></section>"
+    ).join("") : vacioPag("Todavía no hay talleres publicados.");
+    return cab("Talleres", "Lo que practicamos con las manos.") + '<div class="wrap pagina">' + cuerpo + "</div>";
+  }
+
+  /* ---------- ROTACIONES ---------- */
+  function viewRotaciones() {
+    const sems = ROTACION.semanas;
+    if (rotTab > sems.length) rotTab = 0;
+    const tabs = ['<button type="button" role="tab" data-s="0" aria-selected="' + (rotTab === 0) + '">Toda la rotación</button>']
+      .concat(sems.map((s, i) => '<button type="button" role="tab" data-s="' + (i + 1) + '" aria-selected="' + (i + 1 === rotTab) + '">Semana ' + (i + 1) + "</button>")).join("");
+
+    let cuerpo;
+    if (rotTab === 0) {
+      const b = ROTACION.bitacora || {};
+      cuerpo = '<div class="tit"><h2>Bitácora completa</h2><p class="sub">' + esc(ROTACION.hospital) + "</p></div>" +
+        '<div class="bloque">' + visorSlot({ archivo: b.archivo, enlace: b.enlace, auto: "bitacora-completa.pdf", titulo: "Bitácora de rotación", vacio: "La bitácora completa todavía está en preparación." }) + "</div>" +
+        '<div class="bloque"><h3 class="mini">Fotos de la rotación</h3>' + galeria(ROTACION.fotos, 3, "Rotación") + "</div>";
+    } else {
+      const w = sems[rotTab - 1] || {};
+      cuerpo = '<div class="tit"><h2>Semana ' + rotTab + '</h2><p class="sub">' + esc(w.servicio || "Servicio por definir") + "</p></div>" +
+        (w.nota ? '<div class="cuerpo bloque">' + fmt(w.nota) + "</div>" : "") +
+        '<div class="bloque">' + visorSlot({ archivo: w.archivo, enlace: w.enlace, auto: "bitacora-semana-" + rotTab + ".pdf", titulo: "Bitácora de la semana " + rotTab, vacio: "La bitácora de esta semana todavía está en preparación." }) + "</div>" +
+        '<div class="bloque"><h3 class="mini">Fotos de la semana</h3>' + galeria(w.fotos, 3, "Semana " + rotTab) + "</div>";
+    }
+    return (
+      cab("Rotaciones", "Mi paso por el " + esc(ROTACION.hospital) + ", semana por semana.", '<div class="tabs" role="tablist" aria-label="Semanas de rotación">' + tabs + "</div>") +
+      '<div class="wrap pagina">' + cuerpo + '<p class="aviso"><b>Ojo con la privacidad.</b> Los casos están anonimizados: sin nombres, iniciales, camas ni datos que identifiquen a un paciente.</p></div>'
+    );
+  }
+
+  function bindRotaciones() {
+    $$(".tabs button").forEach((b) => b.addEventListener("click", () => { rotTab = Number(b.getAttribute("data-s")); render(false); }));
+  }
+
+  /* ---------- MULTIMEDIA ---------- */
+  function viewMultimedia() {
+    const chip = (v, t) => '<button type="button" class="chip" data-f="' + v + '" aria-pressed="' + (mmFiltro === v) + '">' + t + "</button>";
+    const items = MULTIMEDIA.filter((m) => mmFiltro === "todo" || m.tipo === mmFiltro);
+    let grid;
+    if (!MULTIMEDIA.length) {
+      grid = '<div class="mm-grid">' + [1, 2, 3, 4, 5, 6].map(() => '<div class="foto-cel">' + fotoVacia("Aquí va tu foto o video") + "</div>").join("") + "</div>";
+    } else if (!items.length) {
+      grid = vacioPag("No hay nada de este tipo por ahora.");
+    } else {
+      grid = '<div class="mm-grid">' + items.map((m) => {
+        const cap = (m.titulo || m.descripcion) ? "<figcaption>" + (m.titulo ? "<b>" + esc(m.titulo) + "</b>" : "") + (m.descripcion ? "<span>" + esc(m.descripcion) + "</span>" : "") + "</figcaption>" : "";
+        if (m.tipo === "video") return '<figure class="mm">' + videoHtml(m) + cap + "</figure>";
+        return '<figure class="mm"><button type="button" class="foto" data-full="' + esc(ruta(m.archivo)) + '" data-cap="' + esc(m.titulo || "") + '"><img src="' + esc(ruta(m.archivo)) + '" alt="' + esc(m.titulo || "Foto") + '" loading="lazy" data-fb="Foto no encontrada"></button>' + cap + "</figure>";
+      }).join("") + "</div>";
+    }
+    return (
+      cab("Multimedia", "Fotos y videos de las clases, los talleres y la rotación.",
+        MULTIMEDIA.length ? '<div class="chips" role="group" aria-label="Filtrar">' + chip("todo", "Todo") + chip("foto", "Fotos") + chip("video", "Videos") + "</div>" : "") +
+      '<div class="wrap pagina">' + grid + "</div>"
+    );
+  }
+
+  function bindMultimedia() {
+    $$(".chip").forEach((b) => b.addEventListener("click", () => { mmFiltro = b.getAttribute("data-f"); render(false); }));
+  }
+
+  /* ---------- TRABAJOS ---------- */
+  function viewTrabajos() {
+    let cuerpo;
+    if (!TRABAJOS.length) {
+      cuerpo = '<ul class="trabajos">' + [1, 2, 3].map(() => '<li class="trabajo vacio-t"><span>Aquí va tu próximo trabajo</span></li>').join("") + "</ul>";
+    } else {
+      cuerpo = '<ul class="trabajos">' + TRABAJOS.map((t) =>
+        '<li class="trabajo"><details><summary><span class="tt">' + esc(t.titulo) + "</span>" + (t.fecha ? '<span class="pill peq">' + esc(t.fecha) + "</span>" : "") + "</summary>" +
+        '<div class="tc">' + (t.descripcion ? '<div class="cuerpo">' + fmt(t.descripcion) + "</div>" : "") +
+        visorSlot({ archivo: t.archivo, enlace: t.enlace, titulo: t.titulo, vacio: (t.archivo || t.enlace) ? "" : "El documento de este trabajo todavía no está subido." }) +
+        galeria(t.fotos, 0, t.titulo) + "</div></details></li>"
+      ).join("") + "</ul>";
+    }
+    return cab("Trabajos", "Los trabajos y casos que he entregado en la materia.") + '<div class="wrap pagina">' + cuerpo + "</div>";
+  }
+
+  /* ---------- EXTRAS ---------- */
+  function viewExtras() {
+    let cuerpo;
+    if (!EXTRAS.length) {
+      cuerpo = '<ul class="extras">' + [1, 2, 3].map(() => '<li class="extra"><div class="extra-f">' + fotoVacia("Aquí va tu foto") + '</div><div class="extra-t"><b>Aquí va un extra</b><span>Guías, algoritmos, enlaces útiles.</span></div></li>').join("") + "</ul>";
+    } else {
+      cuerpo = '<ul class="extras">' + EXTRAS.map((x) => {
+        const url = x.archivo ? ruta(x.archivo) : x.enlace ? esc(x.enlace) : "";
+        return '<li class="extra"><div class="extra-f">' + imgHtml(x.foto, x.titulo, "Aquí va tu foto") + '</div><div class="extra-t"><b>' + esc(x.titulo) + "</b>" +
+          (x.descripcion ? "<span>" + esc(x.descripcion) + "</span>" : "") + (url ? '<a class="btn peq" href="' + url + '" target="_blank" rel="noopener">Abrir</a>' : "") + "</div></li>";
+      }).join("") + "</ul>";
+    }
+    return cab("Extras", "Material aparte que me ha servido.") + '<div class="wrap pagina">' + cuerpo + "</div>";
+  }
+
+  function viewNoEncontrado() {
+    return cab("Esa página no existe", "Puede que el enlace esté mal escrito.") +
+      '<div class="wrap pagina"><div class="acciones"><a class="btn" href="#/">Ir al inicio</a><a class="btn ghost" href="#/clases">Ver las clases</a></div></div>';
+  }
+
+  /* ---------- rutas ---------- */
+  function parseRoute() {
+    const raw = location.hash.replace(/^#\/?/, "");
+    return { parts: raw.split("?")[0].split("/").filter(Boolean) };
+  }
+
+  function marcarNav() {
+    let key = parseRoute().parts[0] || "";
+    if (key === "clase") key = "clases";
+    if (key === "rotacion") key = "rotaciones";
+    $$("a", nav).forEach((a) => {
+      if (a.getAttribute("data-r") === key) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+  }
+
+  function renderInterno(scroll) {
+    const r = parseRoute();
+    const ruta0 = r.parts[0] || "";
+    let html = "", despues = null, titulo = PERFIL.blog + " - " + PERFIL.nombre;
+    const t = (x) => x + " - " + PERFIL.blog;
+
+    if (ruta0 === "") { html = viewHome(); despues = bindHome; }
+    else if (ruta0 === "clases") { html = viewClases(); titulo = t("Clases"); }
+    else if (ruta0 === "clase") {
+      const id = Number(r.parts[1]); const c = byId(id);
+      html = viewClase(id); despues = () => bindClase(id);
+      if (c) titulo = t(c.tema);
+    }
+    else if (ruta0 === "talleres") { html = viewTalleres(); titulo = t("Talleres"); }
+    else if (ruta0 === "rotaciones" || ruta0 === "rotacion") { html = viewRotaciones(); despues = bindRotaciones; titulo = t("Rotaciones"); }
+    else if (ruta0 === "multimedia") { html = viewMultimedia(); despues = bindMultimedia; titulo = t("Multimedia"); }
+    else if (ruta0 === "trabajos") { html = viewTrabajos(); titulo = t("Trabajos"); }
+    else if (ruta0 === "extras") { html = viewExtras(); titulo = t("Extras"); }
+    else { html = viewNoEncontrado(); }
+
+    document.body.classList.toggle("en-inicio", ruta0 === "");
+    app.classList.remove("ruta-in");
+    app.innerHTML = html;
+    if (ruta0 !== "") { void app.offsetWidth; app.classList.add("ruta-in"); }
+    document.title = titulo;
+    marcarNav();
+    if (despues) despues();
+    $$(".visor").forEach(montarVisor);
+    if (scroll !== false) { window.scrollTo(0, 0); app.focus({ preventScroll: true }); }
+    alScroll();
+  }
+
+  function render(scroll) {
+    try { renderInterno(scroll); }
+    catch (e) {
+      if (window.console) console.error(e);
+      app.innerHTML = '<div class="wrap pagina"><div class="pendiente"><h2>Algo no cargó bien</h2><p>Casi siempre pasa porque un archivo del sitio no se actualizó todavía. Recarga con Cmd+Shift+R (o Ctrl+Shift+R) y revisa que index.html, estilos.css, app.js y contenido.js estén subidos en GitHub.</p><p style="margin-top:.8rem;font-size:.85rem">Detalle técnico: ' + esc(e && e.message) + '</p></div></div>';
+    }
+  }
+
+  /* ---------- encabezado transparente en el inicio y movimiento de la portada al bajar ---------- */
+  let esperando = false;
+  function alScroll() {
+    if (esperando) return;
+    esperando = true;
+    requestAnimationFrame(() => {
+      esperando = false;
+      const y = window.pageYOffset || 0;
+      document.body.classList.toggle("desplazado", y > 40);
+      const p = $("#portada");
+      if (p && y < window.innerHeight * 1.3) p.style.setProperty("--sy", Math.round(y));
+    });
+  }
+  window.addEventListener("scroll", alScroll, { passive: true });
+
+  /* ---------- fotos que no cargan: se muestra el espacio vacío ---------- */
+  app.addEventListener("error", (e) => {
+    const img = e.target;
+    if (!img || img.tagName !== "IMG") return;
+    if (img.hasAttribute("data-fb-avatar")) {
+      const s = document.createElement("span");
+      s.className = "avatar ini"; s.textContent = img.getAttribute("data-fb-avatar");
+      if (img.parentNode) img.parentNode.replaceWith(s);
+      return;
+    }
+    const s = img.getAttribute("src") || "";
+    const intento = img.getAttribute("data-reintento");
+    if (!intento && s && !/^(https?:|data:|archivos\/)/i.test(s)) {
+      img.setAttribute("data-reintento", "1"); img.setAttribute("src", "archivos/" + s); return;
+    }
+    if (intento === "1") img.setAttribute("data-reintento", "2");
+    if (img.hasAttribute("data-oculta")) { img.style.display = "none"; return; }
+    if (!img.hasAttribute("data-fb")) return;
+    const holder = document.createElement("div");
+    holder.innerHTML = fotoVacia(img.getAttribute("data-fb"));
+    const p = img.parentNode;
+    if (p && p.classList && p.classList.contains("foto")) p.removeAttribute("data-full");
+    img.replaceWith(holder.firstChild);
+  }, true);
+
+  /* ---------- ampliar fotos ---------- */
+  const lb = document.createElement("div");
+  lb.className = "lb"; lb.hidden = true; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Foto ampliada");
+  lb.innerHTML = '<button type="button" class="lb-x" aria-label="Cerrar">×</button><img alt=""><p class="lb-cap"></p>';
+  document.body.appendChild(lb);
+  const cerrarLb = () => { lb.hidden = true; document.body.classList.remove("sin-scroll"); };
+  lb.addEventListener("click", (e) => { if (e.target !== $("img", lb)) cerrarLb(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !lb.hidden) cerrarLb(); });
+  app.addEventListener("click", (e) => {
+    const b = e.target.closest ? e.target.closest(".foto[data-full]") : null;
+    if (!b) return;
+    $("img", lb).src = b.getAttribute("data-full");
+    $("img", lb).alt = b.getAttribute("data-cap") || "Foto ampliada";
+    $(".lb-cap", lb).textContent = b.getAttribute("data-cap") || "";
+    lb.hidden = false; document.body.classList.add("sin-scroll");
+    $(".lb-x", lb).focus();
+  });
+
+  const firma = $("#pie-firma");
+  if (firma) firma.textContent = PERFIL.nombre + ", " + PERFIL.universidad + ", " + PERFIL.semestre + ".";
+
+  window.addEventListener("hashchange", () => render(true));
+  render(false);
+  detectar();
+})();
+
+  
+  
+  </script>
+</body>
+</html>
